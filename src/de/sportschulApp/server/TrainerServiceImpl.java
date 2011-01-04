@@ -70,6 +70,7 @@ TrainerService {
 	}
 
 	public void setPassedValues(Event event, ArrayList<EventParticipant> participants) {
+		saveEvent(event.getEventID(), participants);
 		dbe.setPassedValues(event, participants);
 	}
 }

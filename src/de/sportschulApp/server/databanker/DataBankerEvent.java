@@ -90,7 +90,6 @@ public class DataBankerEvent implements DataBankerEventInterface {
 		try {
 			stmt.executeUpdate(query);
 			deleteExaminersFromEvent(eventID);
-			deleteCoursesFromEvent(eventID);
 			dbc.close();
 			stmt.close();
 			dbc.closeStatement();
@@ -127,25 +126,6 @@ public class DataBankerEvent implements DataBankerEventInterface {
 		Statement stmt = dbc.getStatement();
 
 		String query = "DELETE FROM Event_has_participants WHERE Event_id='" + eventID + "'";
-
-		try {
-			stmt.executeUpdate(query);
-			dbc.close();
-			stmt.close();
-			dbc.closeStatement();
-
-		} catch (SQLException e) {
-			System.out.println(e);
-			return false;
-		}
-		return true;
-	}
-	
-	public Boolean deleteCoursesFromEvent(int eventID) {
-		DataBankerConnection dbc = new DataBankerConnection();
-		Statement stmt = dbc.getStatement();
-
-		String query = "DELETE FROM Event_has_courses WHERE Event_id='" + eventID + "'";
 
 		try {
 			stmt.executeUpdate(query);

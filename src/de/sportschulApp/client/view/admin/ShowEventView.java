@@ -17,6 +17,7 @@ public class ShowEventView extends Composite implements ShowEventPresenter.Displ
 	private Label deleteLabel;
 	private Label editLabel;
 	private Label closeLabel;
+	private Label editParticipantsLabel;
 	private Label showParticipantsLabel;
 	private Label eventCostsLabel = new Label();
 	private Label eventDateLabel = new Label();
@@ -28,18 +29,20 @@ public class ShowEventView extends Composite implements ShowEventPresenter.Displ
 
 	public ShowEventView(LocalizationConstants constants) {
 		VerticalPanel detailsPanel = new VerticalPanel();
-		detailsPanel.setWidth("450px");
 		initWidget(detailsPanel);
 
 		HorizontalPanel metaPanel = new HorizontalPanel();
 		metaPanel.addStyleName("metaPanel");
+		metaPanel.setWidth("100%");
 
 		editLabel = new Label("Event bearbeiten");
-		showParticipantsLabel = new Label("Teilnehmer bearbeiten");
+		editParticipantsLabel = new Label("Teilnehmer bearbeiten");
+		showParticipantsLabel = new Label("Teilnehmer anzeigen");
 		deleteLabel = new Label("Event löschen");
 		closeLabel = new Label("Schließen");
 
 		metaPanel.add(editLabel);
+		metaPanel.add(editParticipantsLabel);
 		metaPanel.add(showParticipantsLabel);
 		metaPanel.add(deleteLabel);
 		metaPanel.add(closeLabel);
@@ -48,6 +51,7 @@ public class ShowEventView extends Composite implements ShowEventPresenter.Displ
 
 		FlexTable courseDetailsPanel = new FlexTable();
 		courseDetailsPanel.setStyleName("detailsDataPanel");
+		courseDetailsPanel.setWidth("100%");
 		courseDetailsPanel.setWidget(0, 0, new Label(constants.eventName() + ":"));
 		courseDetailsPanel.setWidget(0, 1, eventNameLabel);
 		courseDetailsPanel.setWidget(1, 0, new Label(constants.eventType() + ":"));
@@ -65,6 +69,7 @@ public class ShowEventView extends Composite implements ShowEventPresenter.Displ
 
 		detailsPanel.add(courseDetailsPanel);
 	}
+	
 
 	@Override
 	public Widget asWidget() {
@@ -77,6 +82,10 @@ public class ShowEventView extends Composite implements ShowEventPresenter.Displ
 
 	public HasClickHandlers getEditLabel() {
 		return editLabel;
+	}
+	
+	public HasClickHandlers getEditParticipantsLabel() {
+		return editParticipantsLabel;
 	}
 	
 	public HasClickHandlers getShowParticipantsLabel() {
@@ -100,5 +109,10 @@ public class ShowEventView extends Composite implements ShowEventPresenter.Displ
 			examiners = examiners + event.getExaminers().get(i) + ", ";
 		}
 		eventExaminersLabel.setText(examiners.substring(0, examiners.length() -2));
+		
+		if (event.getHappened().equals("Beendet")) {
+			editLabel.setVisible(false);
+			editParticipantsLabel.setVisible(false);
+		}
 	}
 }

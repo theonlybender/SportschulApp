@@ -23,6 +23,7 @@ import de.sportschulApp.client.presenter.admin.CreateEventPresenter;
 import de.sportschulApp.client.presenter.admin.CreateMemberPresenter;
 import de.sportschulApp.client.presenter.admin.CreateUserPresenter;
 import de.sportschulApp.client.presenter.admin.ListCoursePresenter;
+import de.sportschulApp.client.presenter.admin.EditEventParticipantsPresenter;
 import de.sportschulApp.client.presenter.admin.ListEventParticipantsPresenter;
 import de.sportschulApp.client.presenter.admin.ListEventPresenter;
 import de.sportschulApp.client.presenter.admin.ListMemberPresenter;
@@ -41,6 +42,7 @@ import de.sportschulApp.client.view.admin.CreateEventView;
 import de.sportschulApp.client.view.admin.CreateMemberView;
 import de.sportschulApp.client.view.admin.CreateUserView;
 import de.sportschulApp.client.view.admin.ListCourseView;
+import de.sportschulApp.client.view.admin.EditEventParticipantsView;
 import de.sportschulApp.client.view.admin.ListEventParticipantsView;
 import de.sportschulApp.client.view.admin.ListEventView;
 import de.sportschulApp.client.view.admin.ListMemberView;
@@ -148,6 +150,10 @@ public class AdminPanelPresenter implements Presenter {
 			navigationPresenter = new NavigationPresenter(eventBus, new NavigationView(1, constants));
 			contentPresenter =  new CreateEventPresenter(rpcService, eventBus, new CreateEventView(constants), eventID);
 		} else if ((token.length() >= "adminEventsEditParticipants".length()) && (token.subSequence(0, 27).equals("adminEventsEditParticipants"))) {
+			String eventID = token.substring(28);
+			navigationPresenter = new NavigationPresenter(eventBus, new NavigationView(1, constants));
+			contentPresenter =  new EditEventParticipantsPresenter(rpcService, eventBus, new EditEventParticipantsView(eventBus, constants), eventID, constants);
+		} else if ((token.length() >= "adminEventsShowParticipants".length()) && (token.subSequence(0, 27).equals("adminEventsShowParticipants"))) {
 			String eventID = token.substring(28);
 			navigationPresenter = new NavigationPresenter(eventBus, new NavigationView(1, constants));
 			contentPresenter =  new ListEventParticipantsPresenter(rpcService, eventBus, new ListEventParticipantsView(eventBus, constants), eventID, constants);
