@@ -124,7 +124,8 @@ public class NewTrainingView extends Composite implements
 	public VerticalPanel createMemberListTable() {
 		cellTable = new CellTable<Member>();
 		cellTable.sinkEvents(Event.ONCLICK);
-
+		//cellTable.setStyleName("trainingCell");
+		
 		ldp = new ListDataProvider<Member>();
 
 		VerticalPanel tableWrapper = new VerticalPanel();
@@ -207,6 +208,67 @@ public class NewTrainingView extends Composite implements
 			}
 		});
 
+		
+		
+		Column<Member, String> birthdayColumn = new Column<Member, String>(
+				new TextCell()) {
+			@Override
+			public String getValue(Member object) {
+				Date memberBirthDate = new Date();
+
+				memberBirthDate
+						.setYear(Integer.parseInt((object.getBirthYear())) - 1900);
+				memberBirthDate.setMonth(Integer.parseInt(object
+						.getBirthMonth()) - 1);
+				memberBirthDate.setDate(Integer.parseInt(object.getBirthDay()));
+
+				// TODO
+				if (((memberBirthDate.getDate() == today.getDate()))
+						&& memberBirthDate.getMonth() == today.getMonth()) {
+					return "Hat heute Geburtstag!";
+					// showBirthdayLabel(0);
+				} else if (((memberBirthDate.getDate() - today.getDate()) >= -7)
+						&& ((memberBirthDate.getDate() - today.getDate()) <= 0)
+						&& memberBirthDate.getMonth() == today.getMonth()) {
+					// showBirthdayLabel(1);
+					return "Hatte am " + object.getBirthDay() + "."
+							+ object.getBirthMonth() + "."
+							+ object.getBirthYear();
+				} else if (((today.getDate() - memberBirthDate.getDate()) <= -23)
+						&& memberBirthDate.getMonth() == today.getMonth() - 1) {
+
+					return "Hatte am " + object.getBirthDay() + "."
+							+ object.getBirthMonth() + "."
+							+ object.getBirthYear();
+				} else if (((memberBirthDate.getDate() - today.getDate()) <= 7)
+						&& memberBirthDate.getMonth() == today.getMonth()) {
+
+					return "Hat am " + object.getBirthDay() + "."
+							+ object.getBirthMonth() + "."
+							+ object.getBirthYear();
+				} else if (((memberBirthDate.getDate() - today.getDate()) <= -24)
+						&& memberBirthDate.getMonth() == today.getMonth() + 1) {
+
+					return "Hat am " + object.getBirthDay() + "."
+							+ object.getBirthMonth() + "."
+							+ object.getBirthYear();
+				}
+				return "";
+			}
+
+		};
+		
+		
+
+		Column<Member, String> diseasesColumn = new Column<Member, String>(
+				new TextCell()) {
+			@Override
+			public String getValue(Member object) {
+				// TODO
+				return object.getDiseases();
+			}
+		};
+		
 		Column<Member, String> deleteColumn = new Column<Member, String>(
 				new ButtonCell()) {
 			@Override
@@ -225,12 +287,16 @@ public class NewTrainingView extends Composite implements
 		cellTable.addColumn(thumbsColumn, "");
 		cellTable.addColumn(pictureColumn, "Bild");
 		cellTable.addColumn(trainingsPresenceColumn, "Anwesehnheit");
-		//cellTable.addColumn(barcodeColumn, "Barcode");
+		// cellTable.addColumn(barcodeColumn, "Barcode");
 		cellTable.addColumn(forenameColumn, "Vorname");
 		cellTable.addColumn(surnameColumn, "Nachname");
 		cellTable.addColumn(noteColumn, "Notiz");
+		cellTable.addColumn(birthdayColumn, "Geburtstag");
+		cellTable.addColumn(diseasesColumn, "Krankheiten");
 		cellTable.addColumn(deleteColumn, "");
 
+		cellTable.addColumnStyleName(5, "noteColumn");
+		tableWrapper.setStyleName("tableWrapper");
 		tableWrapper.add(cellTable);
 
 		return tableWrapper;

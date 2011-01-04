@@ -903,3 +903,20 @@ h1 {
 	margin: auto;
 	width: 350px;
 }
+
+
+
+.tableWrapper td:nth-child(7) {
+	color: red;
+	
+}
+
+.tableWrapper td:nth-child(8) {
+	color: red;
+	
+}
+
+.tableWrapper td:nth-child(6) {
+	width: 500px !important;
+	
+}
