@@ -20,6 +20,7 @@ public class ShowEventPresenter implements Presenter{
 		Widget asWidget();
 		HasClickHandlers getDeleteLabel();
 		HasClickHandlers getEditLabel();
+		HasClickHandlers getEditParticipantsLabel();
 		HasClickHandlers getShowParticipantsLabel();
 		HasClickHandlers getCloseLabel();
 		void setData(Event event);
@@ -45,9 +46,15 @@ public class ShowEventPresenter implements Presenter{
 			}
 		});
 		
-		display.getShowParticipantsLabel().addClickHandler(new ClickHandler() {
+		display.getEditParticipantsLabel().addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent e) {
 				History.newItem("adminEventsEditParticipants:" + event.getEventID());
+			}
+		});
+		
+		display.getShowParticipantsLabel().addClickHandler(new ClickHandler() {
+			public void onClick(ClickEvent e) {
+				History.newItem("adminEventsShowParticipants:" + event.getEventID());
 			}
 		});
 
