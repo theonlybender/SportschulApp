@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.google.gwt.event.shared.HandlerManager;
 import com.google.gwt.user.cellview.client.CellTable;
+import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.HasWidgets;
@@ -44,7 +45,6 @@ public class ListEventParticipantsPresenter implements Presenter{
 	private void bind() {
 
 	}
-	
 
 	public void fetchListData() {
 		rpcService.getEventParticipants(Integer.valueOf(eventID) , new AsyncCallback<ArrayList<EventParticipant>>() {

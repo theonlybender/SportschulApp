@@ -63,7 +63,7 @@ public class CreateEventPresenter implements Presenter {
 	private final LocalizationConstants constants;
 	private final Display display;
 	private Boolean editItem = false;
-	private String eventID = "0";
+	private String eventID;
 	private PopupDescription popupDesc;
 	private final AdminServiceAsync rpcService;
 	private ValidationProcessor validator;
@@ -81,11 +81,10 @@ public class CreateEventPresenter implements Presenter {
 			HandlerManager eventBus, Display display, String eventID) {
 		this.display = display;
 		this.rpcService = rpcService;
-		this.constants = display.getConstants();
+		constants = display.getConstants();
 		this.eventID = eventID;
 		editItem = true;
 		bind();
-		getEventDetails(eventID);
 		setupValidation();
 	}
 
@@ -143,6 +142,7 @@ public class CreateEventPresenter implements Presenter {
 			}
 			public void onSuccess(ArrayList<Course> result) {
 				display.setCourses(result);
+				getEventDetails(eventID);
 			}
 		});
 	}

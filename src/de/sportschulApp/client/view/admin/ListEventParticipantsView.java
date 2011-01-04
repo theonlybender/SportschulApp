@@ -8,15 +8,20 @@ import com.google.gwt.cell.client.EditTextCell;
 import com.google.gwt.cell.client.FieldUpdater;
 import com.google.gwt.cell.client.ImageCell;
 import com.google.gwt.cell.client.TextCell;
+import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.event.shared.HandlerManager;
 import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.cellview.client.Column;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.HasValue;
 import com.google.gwt.user.client.ui.HorizontalPanel;
+import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.view.client.ListDataProvider;
+import com.google.gwt.view.client.SingleSelectionModel;
 
 import de.sportschulApp.client.event.ShowMemberEvent;
 import de.sportschulApp.client.presenter.admin.ListEventParticipantsPresenter;
@@ -136,6 +141,7 @@ public class ListEventParticipantsView extends Composite implements ListEventPar
 			}
 		};
 
+
 		Column<EventParticipant, String> paidColumn = new Column<EventParticipant, String>(new TextCell()) {
 			@Override
 			public String getValue(EventParticipant object) {
@@ -148,7 +154,7 @@ public class ListEventParticipantsView extends Composite implements ListEventPar
 			public String getValue(EventParticipant object) {
 				return object.getAttended();
 			}
-		};
+		};	
 
 		Column<EventParticipant, String> showMemberColumn = new Column<EventParticipant, String>(
 				new ButtonCell()) {

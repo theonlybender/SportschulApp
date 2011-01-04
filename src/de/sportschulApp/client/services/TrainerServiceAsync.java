@@ -28,6 +28,11 @@ public interface TrainerServiceAsync {
 	void getEventParticipants(int eventID,
 			AsyncCallback<ArrayList<EventParticipant>> callback);
 
+	void removeTrainingsPresence(int barcodeID, int date, int month, int year,
+			AsyncCallback<String> asyncCallback);
+
+	void getMemberByBarcodeID2(int barcodeID, int month, int year, AsyncCallback<Member> callback);
+
 	void abortEvent(int eventID, AsyncCallback<Void> callback);
 
 	void saveEvent(int eventID, ArrayList<EventParticipant> participants,
