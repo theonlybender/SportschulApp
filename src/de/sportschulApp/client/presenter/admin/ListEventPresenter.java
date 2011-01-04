@@ -64,15 +64,13 @@ public class ListEventPresenter implements Presenter{
 
 	public void setSelectionModel() {
 		final SingleSelectionModel<Event> selectionModel = new SingleSelectionModel<Event>();
-		Handler selectionHandler = new SelectionChangeEvent.Handler() {
+		selectionModel.addSelectionChangeHandler(new SelectionChangeEvent.Handler() {
 			public void onSelectionChange(SelectionChangeEvent event) {
 				Event selection = selectionModel.getSelectedObject();
 				eventBus.fireEvent(new ShowEventEvent(selection.getEventID()));
 				selectionModel.setSelected(selection, false);
 			}
-		};
-		selectionModel.addSelectionChangeHandler(selectionHandler);
+		});
 		display.setSelectionModel(selectionModel);
 	}
-
 }

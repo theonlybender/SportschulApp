@@ -23,7 +23,7 @@ import de.sportschulApp.client.presenter.admin.CreateEventPresenter;
 import de.sportschulApp.client.presenter.admin.CreateMemberPresenter;
 import de.sportschulApp.client.presenter.admin.CreateUserPresenter;
 import de.sportschulApp.client.presenter.admin.ListCoursePresenter;
-import de.sportschulApp.client.presenter.admin.ListEventParticipantsPresenter;
+import de.sportschulApp.client.presenter.admin.EditEventParticipantsPresenter;
 import de.sportschulApp.client.presenter.admin.ListEventPresenter;
 import de.sportschulApp.client.presenter.admin.ListMemberPresenter;
 import de.sportschulApp.client.presenter.admin.ListUserPresenter;
@@ -41,7 +41,7 @@ import de.sportschulApp.client.view.admin.CreateEventView;
 import de.sportschulApp.client.view.admin.CreateMemberView;
 import de.sportschulApp.client.view.admin.CreateUserView;
 import de.sportschulApp.client.view.admin.ListCourseView;
-import de.sportschulApp.client.view.admin.ListEventParticipantsView;
+import de.sportschulApp.client.view.admin.EditEventParticipantsView;
 import de.sportschulApp.client.view.admin.ListEventView;
 import de.sportschulApp.client.view.admin.ListMemberView;
 import de.sportschulApp.client.view.admin.ListUserView;
@@ -150,7 +150,7 @@ public class AdminPanelPresenter implements Presenter {
 		} else if ((token.length() >= "adminEventsEditParticipants".length()) && (token.subSequence(0, 27).equals("adminEventsEditParticipants"))) {
 			String eventID = token.substring(28);
 			navigationPresenter = new NavigationPresenter(eventBus, new NavigationView(1, constants));
-			contentPresenter =  new ListEventParticipantsPresenter(rpcService, eventBus, new ListEventParticipantsView(eventBus, constants), eventID, constants);
+			contentPresenter =  new EditEventParticipantsPresenter(rpcService, eventBus, new EditEventParticipantsView(eventBus, constants), eventID, constants);
 		} else if (token.equals("adminCourseCreateCourse")) {
 			navigationPresenter = new NavigationPresenter(eventBus, new NavigationView(2, constants));
 			contentPresenter =  new CreateCoursePresenter(rpcService, eventBus, new CreateCourseView(constants, true));
@@ -196,7 +196,7 @@ public class AdminPanelPresenter implements Presenter {
 		beltPopup.setPopupPosition(beltPopup.getAbsoluteLeft() - 200, beltPopup.getAbsoluteTop() - 150);
 		beltPopup.setWidth("auto");
 		Presenter showBeltPresenter = null;
-		showBeltPresenter =  new ShowBeltPresenter(rpcService, eventBus, new ShowBeltView(constants), beltID);
+		showBeltPresenter =  new ShowBeltPresenter(rpcService, eventBus, new ShowBeltView(constants), beltID, beltPopup);
 		showBeltPresenter.go(beltPopup);
 		beltPopup.show();
 	}
@@ -210,7 +210,7 @@ public class AdminPanelPresenter implements Presenter {
 		coursePopup.setPopupPosition(coursePopup.getAbsoluteLeft() - 200, coursePopup.getAbsoluteTop() - 150);
 		coursePopup.setWidth("auto");
 		Presenter showCoursePresenter = null;
-		showCoursePresenter =  new ShowCoursePresenter(rpcService, eventBus, new ShowCourseView(constants), courseID);
+		showCoursePresenter =  new ShowCoursePresenter(rpcService, eventBus, new ShowCourseView(constants), courseID, coursePopup);
 		showCoursePresenter.go(coursePopup);
 		coursePopup.show();
 	}
@@ -224,7 +224,7 @@ public class AdminPanelPresenter implements Presenter {
 		eventPopup.setPopupPosition(eventPopup.getAbsoluteLeft() - 200, eventPopup.getAbsoluteTop() - 150);
 		eventPopup.setWidth("auto");
 		Presenter showEventPresenter = null;
-		showEventPresenter =  new ShowEventPresenter(rpcService, eventBus, new ShowEventView(constants), eventID);
+		showEventPresenter =  new ShowEventPresenter(rpcService, eventBus, new ShowEventView(constants), eventID, eventPopup);
 		showEventPresenter.go(eventPopup);
 		eventPopup.show();
 	}
@@ -238,7 +238,7 @@ public class AdminPanelPresenter implements Presenter {
 		memberPopup.setPopupPosition(memberPopup.getAbsoluteLeft() - 200, memberPopup.getAbsoluteTop() - 150);
 		memberPopup.setWidth("auto");
 		Presenter showMemberPresenter = null;
-		showMemberPresenter =  new ShowMemberPresenter(rpcService, eventBus, new ShowMemberView(constants), barcodeID);
+		showMemberPresenter =  new ShowMemberPresenter(rpcService, eventBus, new ShowMemberView(constants), barcodeID, memberPopup);
 		showMemberPresenter.go(memberPopup);
 		memberPopup.show();
 	}
@@ -252,7 +252,7 @@ public class AdminPanelPresenter implements Presenter {
 		userPopup.setPopupPosition(userPopup.getAbsoluteLeft() - 200, userPopup.getAbsoluteTop() - 150);
 		userPopup.setWidth("auto");
 		Presenter showUserPresenter = null;
-		showUserPresenter =  new ShowUserPresenter(rpcService, eventBus, new ShowUserView(constants), userID);
+		showUserPresenter =  new ShowUserPresenter(rpcService, eventBus, new ShowUserView(constants), userID, userPopup);
 		showUserPresenter.go(userPopup);
 		userPopup.show();
 	}
