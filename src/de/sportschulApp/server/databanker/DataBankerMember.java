@@ -8,9 +8,11 @@ import java.util.ArrayList;
 
 import sun.security.action.GetBooleanAction;
 
+import de.sportschulApp.shared.BankAccount;
 import de.sportschulApp.shared.Member;
 
 public class DataBankerMember implements DataBankerMemberInterface {
+
 	/**
 	 * Legt einen neues Mitglied an.
 	 * 
@@ -878,6 +880,44 @@ public class DataBankerMember implements DataBankerMemberInterface {
 		}
 		return "Mitglied gespeichert";
 
+	}
+
+	public ArrayList<BankAccount> getBankAccounts() {
+		ArrayList<BankAccount> accountList = new ArrayList<BankAccount>();
+
+		ResultSet rs = null;
+
+		DataBankerConnection dbc = new DataBankerConnection();
+		Statement stmt = dbc.getStatement();
+		String query = "SELECT barcode_id, accountForename, accountSurname, accountNumber, bankName, bankNumber FROM Member";
+		try {
+			rs = stmt.executeQuery(query);
+			if (rs.wasNull()) {
+			}
+			while (rs.next()) {
+				BankAccount account = new BankAccount();
+				account.setBarcodeId(rs.getInt("barcode_id"));
+				account.setForename(rs.getString("accountForename"));
+				account.setSurname(rs.getString("accountSurname"));
+				account.setBankName(rs.getString("bankName"));
+				account.setBankNumber(rs.getString("bankNumber"));
+				account.setAccountNumber(rs.getString("accountNumber"));
+
+				
+				
+				
+				accountList.add(account);
+			}
+			rs.close();
+			dbc.close();
+			stmt.close();
+			dbc.closeStatement();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+		return accountList;
 	}
 
 	

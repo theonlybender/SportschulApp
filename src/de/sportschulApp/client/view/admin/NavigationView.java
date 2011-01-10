@@ -31,6 +31,7 @@ public class NavigationView extends Composite implements NavigationPresenter.Dis
 	private Label menuMembersShowMembers;
 	private Label menuSystemCreateUser;
 	private Label menuSystemShowUsers;
+	private Label menuBankAccount;
 
 
 	public NavigationView(int tabIndex, LocalizationConstants constants) {
@@ -155,6 +156,10 @@ public class NavigationView extends Composite implements NavigationPresenter.Dis
 	public HasClickHandlers getMenuSystemShowUsers() {
 		return menuSystemShowUsers;
 	}
+	
+	public HasClickHandlers getMenuBankAccount() {
+		return menuBankAccount;
+	}
 
 	public HorizontalPanel getSubNavigationElements(int navigationID) {
 		HorizontalPanel subNavPanel = new HorizontalPanel();
@@ -163,8 +168,10 @@ public class NavigationView extends Composite implements NavigationPresenter.Dis
 		if (navigationID == 0){
 			menuMembersShowMembers = new Label("Mitglieder anzeigen");
 			menuMembersCreateMember = new Label("Mitglied aufnehmen");
+			menuBankAccount = new Label("Bankdaten");
 			subNavPanel.add(menuMembersShowMembers);
 			subNavPanel.add(menuMembersCreateMember);
+			subNavPanel.add(menuBankAccount);
 		}
 
 		if (navigationID == 1){

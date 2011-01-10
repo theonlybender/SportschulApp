@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
+import de.sportschulApp.shared.BankAccount;
 import de.sportschulApp.shared.Belt;
 import de.sportschulApp.shared.Course;
 import de.sportschulApp.shared.CourseTariff;
@@ -91,5 +92,7 @@ public interface AdminService extends RemoteService {
 	String updateMember(Member member);
 
 	ArrayList<String> getMemberCourses(int course, float tariff);
+
+	ArrayList<BankAccount> getBankAccounts();
 
 }

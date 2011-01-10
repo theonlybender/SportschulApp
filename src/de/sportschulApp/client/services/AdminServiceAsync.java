@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
+import de.sportschulApp.shared.BankAccount;
 import de.sportschulApp.shared.Belt;
 import de.sportschulApp.shared.Course;
 import de.sportschulApp.shared.CourseTariff;
@@ -98,5 +99,8 @@ public interface AdminServiceAsync {
 
 	void getMemberCourses(int course, float tariff,
 			AsyncCallback<ArrayList<String>> asyncCallback);
+
+	void getBankAccounts(
+			AsyncCallback<ArrayList<de.sportschulApp.shared.BankAccount>> asyncCallback);
 	
 }
