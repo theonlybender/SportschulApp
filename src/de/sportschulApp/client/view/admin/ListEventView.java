@@ -175,7 +175,7 @@ public class ListEventView extends Composite implements ListEventPresenter.Displ
 		ArrayList<Event> pastEvents = new ArrayList<Event>();
 		
 		for (int i = 0; i < listData.size(); i++) {
-			if (listData.get(i).getHappened().equals("Nein") || listData.get(i).getHappened().equals("Pause")) {
+			if (listData.get(i).getHappened().equals("Nein") || listData.get(i).getHappened().equals("Ja")) {
 				upcomingEvents.add(listData.get(i));
 			}
 			if (listData.get(i).getHappened().equals("Beendet")) {

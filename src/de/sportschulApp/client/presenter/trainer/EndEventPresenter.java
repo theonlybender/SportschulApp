@@ -34,6 +34,7 @@ public class EndEventPresenter implements Presenter {
 	private final Display display;
 	private final TrainerServiceAsync rpcService;
 	private String eventID;
+	private Event event;
 
 	public EndEventPresenter(TrainerServiceAsync rpcService,
 			HandlerManager eventBus, Display display, String eventID, LocalizationConstants constants) {
@@ -50,8 +51,8 @@ public class EndEventPresenter implements Presenter {
 			public void onClick(ClickEvent event) {
 				for (int i = 0; i < display.getListProvider().getList().size(); i++) {
 					display.getListProvider().getList().get(i).setPassed("Ja");
-					display.getCellTable().redraw();
 				}
+				display.getCellTable().redraw();
 			}
 		});
 		display.getSubmitLabel().addClickHandler(new ClickHandler() {
@@ -95,12 +96,13 @@ public class EndEventPresenter implements Presenter {
 				Window.alert("Fehler beim Abrufen der Eventinformationen");
 			}
 			public void onSuccess(Event result) {
+				event = result;
 				rpcService.setPassedValues(result, (ArrayList<EventParticipant>) display.getCellTable().getDisplayedItems(), new AsyncCallback<Void>() {
 					public void onFailure(Throwable caught) {
 						Window.alert("Abschließen des Events fehlgeschlagen");
 					}
 					public void onSuccess(Void result) {
-						History.newItem("trainerNewEvent");
+						History.newItem("trainerPrintCertificates:" + event.getEventID());
 					}
 				});
 			}

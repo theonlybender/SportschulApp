@@ -142,7 +142,6 @@ EndEventPresenter.Display {
 			}
 		});
 
-
 		cellTable.addColumn(pictureColumn, "Bild");
 		cellTable.addColumn(barcodeColumn, "Barcode");
 		cellTable.addColumn(forenameColumn, "Vorname");

@@ -231,6 +231,7 @@ public class DataBankerEvent implements DataBankerEventInterface {
 			participant.setAttended("Nein");
 			participant.setPicUrl(members.get(i).getPicture());
 			participant.setDiseases(members.get(i).getDiseases());
+			participant.setGradeAfterExam("-");
 			participants.add(participant);
 		}
 		DataBankerConnection dbc = new DataBankerConnection();
@@ -239,7 +240,7 @@ public class DataBankerEvent implements DataBankerEventInterface {
 
 			ResultSet rs = null;
 			Statement stmt = dbc.getStatement();
-			String query = "SELECT Barcode_id, participant, passed, paid, note, attended FROM Event_has_participants WHERE Event_id='"
+			String query = "SELECT Barcode_id, participant, passed, paid, note, attended, gradeAfterExam FROM Event_has_participants WHERE Event_id='"
 				+ eventID + "'";
 
 			rs = stmt.executeQuery(query);
@@ -251,6 +252,7 @@ public class DataBankerEvent implements DataBankerEventInterface {
 						participants.get(i).setNote(rs.getString("note"));
 						participants.get(i).setParticipant(rs.getString("participant"));
 						participants.get(i).setAttended(rs.getString("attended"));
+						participants.get(i).setGradeAfterExam(rs.getString("gradeAfterExam"));
 					}
 				}
 			}
@@ -264,50 +266,6 @@ public class DataBankerEvent implements DataBankerEventInterface {
 
 		return participants;
 
-	}
-	
-	public ArrayList<Integer> getEventCourses(int eventID) {
-		ArrayList<Integer> courses = new ArrayList<Integer>();
-
-		DataBankerConnection dbc = new DataBankerConnection();
-		ResultSet rs = null;
-		Statement stmt = dbc.getStatement();
-		String query = "SELECT course_id FROM Event_has_courses WHERE Event_ID='" + eventID + "'";
-
-		try {
-			rs = stmt.executeQuery(query);
-			while (rs.next()) {
-				courses.add(rs.getInt(1));
-			}
-			rs.close();
-			dbc.close();
-			stmt.close();
-		} catch (Exception e) {
-			System.out.println(e);
-			return null;
-		}
-		return courses;
-	}
-	
-	public void setEventCourses(int eventID, ArrayList<Integer> courses) {
-		DataBankerConnection dbc = new DataBankerConnection();
-		for (int i = 0; i < courses.size(); i++) {
-			try {
-				PreparedStatement stmt = dbc.getConnection().prepareStatement(
-				"INSERT INTO Event_has_courses(Event_id, course_id) VALUES(?,?)");
-				stmt.setInt(1, eventID);
-				stmt.setInt(2, courses.get(i));
-
-				stmt.executeUpdate();
-
-				dbc.close();
-				stmt.close();
-
-
-			} catch (SQLException e) {
-				System.out.println(e);
-			}
-		}
 	}
 
 	public ArrayList<String> getExaminersForEvent(int eventID) {
@@ -360,7 +318,7 @@ public class DataBankerEvent implements DataBankerEventInterface {
 			for (int i = 0; i < participants.size(); i++) {
 				try {
 					PreparedStatement stmt = dbc.getConnection().prepareStatement(
-					"INSERT INTO Event_has_participants(Event_id, Barcode_id, participant, passed, paid, note, attended) VALUES(?,?,?,?,?,?,?)");
+					"INSERT INTO Event_has_participants(Event_id, Barcode_id, participant, passed, paid, note, attended, gradeAfterExam) VALUES(?,?,?,?,?,?,?,?)");
 					stmt.setInt(1, eventID);
 					stmt.setString(2, participants.get(i).getBarcodeID());
 					stmt.setString(3, participants.get(i).getParticipant());
@@ -368,6 +326,7 @@ public class DataBankerEvent implements DataBankerEventInterface {
 					stmt.setString(5, participants.get(i).getPaid());
 					stmt.setString(6, participants.get(i).getNote());
 					stmt.setString(7, participants.get(i).getAttended());
+					stmt.setString(8, participants.get(i).getGradeAfterExam());
 					
 					stmt.executeUpdate();
 
@@ -479,6 +438,42 @@ public class DataBankerEvent implements DataBankerEventInterface {
 				if(participants.get(i).getPassed().equals("Ja")) {
 					PreparedStatement stmt = dbc.getConnection().prepareStatement("UPDATE Member_has_courses SET graduation=(graduation+1) WHERE barcode_id=" + participants.get(i).getBarcodeID() + " AND course_id=" + event.getCourseID());
 					stmt.executeUpdate();	
+					stmt.close();
+				}
+			}
+			dbc.close();
+			updateGradesAfterExam(event, participants);
+		} catch (SQLException e) {
+			System.out.println(e);
+		}
+	}
+	
+	public void updateGradesAfterExam(Event event, ArrayList<EventParticipant> participants) {
+		DataBankerConnection dbc = new DataBankerConnection();
+		
+		try {
+			for (int i = 0; i < participants.size(); i++) {
+				if(participants.get(i).getPassed().equals("Ja")) {
+					ResultSet rs = null;
+					Statement stmt = dbc.getStatement();
+					String query = "SELECT graduation FROM Member_has_courses WHERE barcode_id=" + participants.get(i).getBarcodeID() + " AND course_id=" + event.getCourseID();
+					
+					rs = stmt.executeQuery(query);
+					while (rs.next()) {
+						ResultSet rs1 = null;
+						Statement stmt1 = dbc.getStatement();
+						String query1 = "SELECT grade" + rs.getInt(1) + " FROM Belts WHERE Course_id=" + event.getCourseID();
+						
+						rs1 = stmt1.executeQuery(query1);
+						while (rs1.next()) {
+							PreparedStatement stmt2 = dbc.getConnection().prepareStatement("UPDATE Event_has_participants SET gradeAfterExam='" + rs1.getString(1) + "' WHERE Event_id=" + event.getEventID() + " AND Barcode_id=" + participants.get(i).getBarcodeID());
+							stmt2.executeUpdate();	
+							stmt2.close();
+						}
+						rs1.close();
+						stmt1.close();
+					}
+					rs.close();
 					stmt.close();
 				}
 			}

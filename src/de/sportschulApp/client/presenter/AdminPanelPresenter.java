@@ -34,8 +34,11 @@ import de.sportschulApp.client.presenter.admin.ShowCoursePresenter;
 import de.sportschulApp.client.presenter.admin.ShowEventPresenter;
 import de.sportschulApp.client.presenter.admin.ShowMemberPresenter;
 import de.sportschulApp.client.presenter.admin.ShowUserPresenter;
+import de.sportschulApp.client.presenter.trainer.TrainerNavigationPresenter;
 import de.sportschulApp.client.services.AdminService;
 import de.sportschulApp.client.services.AdminServiceAsync;
+import de.sportschulApp.client.view.PrintCertificatesView;
+import de.sportschulApp.client.presenter.PrintCertificatesPresenter;
 import de.sportschulApp.client.view.admin.BeltEditorView;
 import de.sportschulApp.client.view.admin.CreateCourseView;
 import de.sportschulApp.client.view.admin.CreateEventView;
@@ -54,6 +57,7 @@ import de.sportschulApp.client.view.admin.ShowEventView;
 import de.sportschulApp.client.view.admin.ShowMemberView;
 import de.sportschulApp.client.view.admin.ShowUserView;
 import de.sportschulApp.client.view.localization.LocalizationConstants;
+import de.sportschulApp.client.view.trainer.TrainerNavigationView;
 
 @SuppressWarnings("deprecation")
 public class AdminPanelPresenter implements Presenter {
@@ -157,6 +161,10 @@ public class AdminPanelPresenter implements Presenter {
 			String eventID = token.substring(28);
 			navigationPresenter = new NavigationPresenter(eventBus, new NavigationView(1, constants));
 			contentPresenter =  new ListEventParticipantsPresenter(rpcService, eventBus, new ListEventParticipantsView(eventBus, constants), eventID, constants);
+		} else if ((token.length() >= "adminPrintCertificates".length()) && (token.subSequence(0, 22).equals("adminPrintCertificates"))) {
+			String eventID = token.substring(23);
+			navigationPresenter = new NavigationPresenter(eventBus, new NavigationView(1, constants));
+			contentPresenter =  new PrintCertificatesPresenter(eventBus, new PrintCertificatesView(constants), eventID, constants);
 		} else if (token.equals("adminCourseCreateCourse")) {
 			navigationPresenter = new NavigationPresenter(eventBus, new NavigationView(2, constants));
 			contentPresenter =  new CreateCoursePresenter(rpcService, eventBus, new CreateCourseView(constants, true));

@@ -48,6 +48,7 @@ public class StartEventPresenter implements Presenter {
 		CellTable<EventParticipant> getCellTable();
 		Column<EventParticipant, Boolean> getAttendedColumn();
 		ListDataProvider<EventParticipant> getListProvider();
+		void setEvent(Event event);
 	}
 
 	private final Display display;
@@ -63,11 +64,23 @@ public class StartEventPresenter implements Presenter {
 		this.rpcService = rpcService;
 		this.eventID = eventID;
 		bind();
+		fetchEventData();
 		fetchListData();
 	}
 
 	private void bind() {
 		
+	}
+	
+	public void fetchEventData() {
+		rpcService.getEventByEventID(Integer.valueOf(eventID), new AsyncCallback<Event>() {
+			public void onFailure(Throwable caught) {
+				Window.alert("Fehler beim Abrufen der Eventinformationen.");
+			}
+			public void onSuccess(Event result) {
+				display.setEvent(result);
+			}
+		});
 	}
 	
 	public void fetchListData() {

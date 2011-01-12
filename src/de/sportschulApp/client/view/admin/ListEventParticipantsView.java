@@ -155,6 +155,13 @@ public class ListEventParticipantsView extends Composite implements ListEventPar
 				return object.getAttended();
 			}
 		};	
+		
+		Column<EventParticipant, String> gradeAfterExamColumn = new Column<EventParticipant, String>(new TextCell()) {
+			@Override
+			public String getValue(EventParticipant object) {
+				return object.getGradeAfterExam();
+			}
+		};	
 
 		Column<EventParticipant, String> showMemberColumn = new Column<EventParticipant, String>(
 				new ButtonCell()) {
@@ -179,6 +186,7 @@ public class ListEventParticipantsView extends Composite implements ListEventPar
 		cellTable.addColumn(paidColumn, "Bezahlt?");
 		cellTable.addColumn(passedColumn, "Bestanden?");
 		cellTable.addColumn(noteColumn, "Notiz");
+		cellTable.addColumn(gradeAfterExamColumn, "Neuer Gurt");
 		cellTable.addColumn(showMemberColumn, "Mitglied anzeigen");
 
 		tableWrapper.add(cellTable);

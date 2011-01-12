@@ -19,6 +19,7 @@ public class ShowEventView extends Composite implements ShowEventPresenter.Displ
 	private Label closeLabel;
 	private Label editParticipantsLabel;
 	private Label showParticipantsLabel;
+	private Label printCertificatesLabel;
 	private Label eventCostsLabel = new Label();
 	private Label eventDateLabel = new Label();
 	private Label eventExaminersLabel = new Label();
@@ -39,12 +40,15 @@ public class ShowEventView extends Composite implements ShowEventPresenter.Displ
 		editParticipantsLabel = new Label("Teilnehmer bearbeiten");
 		showParticipantsLabel = new Label("Teilnehmer anzeigen");
 		deleteLabel = new Label("Event löschen");
+		printCertificatesLabel = new Label("Urkunden drucken");
+		printCertificatesLabel.setVisible(false);
 		closeLabel = new Label("Schließen");
 
 		metaPanel.add(editLabel);
 		metaPanel.add(editParticipantsLabel);
 		metaPanel.add(showParticipantsLabel);
 		metaPanel.add(deleteLabel);
+		metaPanel.add(printCertificatesLabel);
 		metaPanel.add(closeLabel);
 
 		detailsPanel.add(metaPanel);
@@ -95,6 +99,10 @@ public class ShowEventView extends Composite implements ShowEventPresenter.Displ
 	public HasClickHandlers getCloseLabel() {
 		return closeLabel;
 	}
+	
+	public HasClickHandlers getPrintCertificatesLabel() {
+		return printCertificatesLabel;
+	}
 
 	public void setData(Event event) {
 		eventNameLabel.setText(event.getName());
@@ -113,6 +121,7 @@ public class ShowEventView extends Composite implements ShowEventPresenter.Displ
 		if (event.getHappened().equals("Beendet")) {
 			editLabel.setVisible(false);
 			editParticipantsLabel.setVisible(false);
+			printCertificatesLabel.setVisible(true);
 		}
 	}
 }

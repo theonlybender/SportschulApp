@@ -23,6 +23,7 @@ public class ShowEventPresenter implements Presenter{
 		HasClickHandlers getEditParticipantsLabel();
 		HasClickHandlers getShowParticipantsLabel();
 		HasClickHandlers getCloseLabel();
+		HasClickHandlers getPrintCertificatesLabel();
 		void setData(Event event);
 	}
 
@@ -70,6 +71,12 @@ public class ShowEventPresenter implements Presenter{
 						}
 					});
 				}
+			}
+		});
+		
+		display.getPrintCertificatesLabel().addClickHandler(new ClickHandler() {
+			public void onClick(ClickEvent e) {
+				History.newItem("adminPrintCertificates:" + event.getEventID());
 			}
 		});
 		

@@ -16,12 +16,13 @@ public class EventParticipant implements Serializable {
 	private String surname;
 	private String attended;
 	private String diseases;
+	private String gradeAfterExam;
 
 	public EventParticipant() {
 
 	}
 
-	public EventParticipant(int eventID, String barcodeID, String forename, String surname, String passed, String paid, String note, String participant, String picUrl, String attended, String diseases) {
+	public EventParticipant(int eventID, String barcodeID, String forename, String surname, String passed, String paid, String note, String participant, String picUrl, String attended, String diseases, String gradeAfterExam) {
 		this.eventID = eventID;
 		this.barcodeID = barcodeID;
 		this.forename = forename;
@@ -33,6 +34,7 @@ public class EventParticipant implements Serializable {
 		this.picUrl = picUrl;
 		this.attended = attended;
 		this.diseases = diseases;
+		this.setGradeAfterExam(gradeAfterExam);
 	}
 
 	public String getBarcodeID() {
@@ -151,6 +153,20 @@ public class EventParticipant implements Serializable {
 	 */
 	public String getDiseases() {
 		return diseases;
+	}
+
+	/**
+	 * @param gradeAfterExam the gradeAfterExam to set
+	 */
+	public void setGradeAfterExam(String gradeAfterExam) {
+		this.gradeAfterExam = gradeAfterExam;
+	}
+
+	/**
+	 * @return the gradeAfterExam
+	 */
+	public String getGradeAfterExam() {
+		return gradeAfterExam;
 	}
 
 

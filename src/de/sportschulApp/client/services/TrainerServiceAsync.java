@@ -45,4 +45,6 @@ public interface TrainerServiceAsync {
 	void setPassedValues(Event event, ArrayList<EventParticipant> participants,
 			AsyncCallback<Void> callback);
 
+	void getEventByEventID(int eventID, AsyncCallback<Event> callback);
+
 }

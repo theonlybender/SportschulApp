@@ -45,5 +45,7 @@ public interface TrainerService extends RemoteService {
 	Event getEvent(int eventID);
 	
 	void setPassedValues(Event event, ArrayList<EventParticipant> participants);
+	
+	Event getEventByEventID(int eventID);
 
 }

@@ -104,6 +104,12 @@ h1 {
 	height: 16px;
 }
 
+.printInfo {
+	padding-left: 10px;
+	padding-top: 3px;
+	padding-bottom: 5px;	
+}
+
 .createUserHeadWrapper {
 	margin: -20px;
 	background-color: #f5f7fa;

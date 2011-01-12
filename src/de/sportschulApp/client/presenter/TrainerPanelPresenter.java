@@ -16,6 +16,7 @@ import de.sportschulApp.client.presenter.trainer.StartEventPresenter;
 import de.sportschulApp.client.presenter.trainer.TrainerNavigationPresenter;
 import de.sportschulApp.client.services.TrainerService;
 import de.sportschulApp.client.services.TrainerServiceAsync;
+import de.sportschulApp.client.view.PrintCertificatesView;
 import de.sportschulApp.client.view.admin.CreateEventView;
 import de.sportschulApp.client.view.admin.NavigationView;
 import de.sportschulApp.client.view.localization.LocalizationConstants;
@@ -53,7 +54,6 @@ public class TrainerPanelPresenter implements Presenter {
 
 	private void bind() {
 		// TODO Auto-generated method stub
-
 	}
 
 	private void buildTrainerPanel(String token) {
@@ -76,6 +76,10 @@ public class TrainerPanelPresenter implements Presenter {
 			String eventID = token.substring(16);
 			navigationPresenter = new TrainerNavigationPresenter(eventBus, new TrainerNavigationView(0, constants));
 			contentPresenter =  new EndEventPresenter(rpcService, eventBus, new EndEventView(constants), eventID, constants);
+		} else if ((token.length() >= "trainerPrintCertificates".length()) && (token.subSequence(0, 24).equals("trainerPrintCertificates"))) {
+			String eventID = token.substring(25);
+			navigationPresenter = new TrainerNavigationPresenter(eventBus, new TrainerNavigationView(0, constants));
+			contentPresenter =  new PrintCertificatesPresenter(eventBus, new PrintCertificatesView(constants), eventID, constants);
 		} else {
 			navigationPresenter = new TrainerNavigationPresenter(eventBus, new TrainerNavigationView(0, constants));
 			contentPresenter =  new NewTrainingPresenter(rpcService, eventBus, new NewTrainingView(constants));

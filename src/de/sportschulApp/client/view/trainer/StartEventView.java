@@ -29,6 +29,7 @@ import com.google.gwt.view.client.ListDataProvider;
 import de.sportschulApp.client.event.ShowMemberEvent;
 import de.sportschulApp.client.presenter.trainer.StartEventPresenter;
 import de.sportschulApp.client.view.localization.LocalizationConstants;
+import de.sportschulApp.shared.Event;
 import de.sportschulApp.shared.EventParticipant;
 
 public class StartEventView extends Composite implements
@@ -46,6 +47,7 @@ StartEventPresenter.Display {
 	private Label saveLabel;
 	private Label abortLabel;
 	private Label endLabel;
+	private Label titleBar = new Label();
 
 	public StartEventView(LocalizationConstants constants) {
 		this.constants = constants;
@@ -60,7 +62,7 @@ StartEventPresenter.Display {
 
 		HorizontalPanel formHeader = new HorizontalPanel();
 		formHeader.addStyleName("formHeader");
-		formHeader.add(new Label("Teilnehmer"));
+		formHeader.add(titleBar);
 		
 		HorizontalPanel barcodeInputPanel = new HorizontalPanel();
 		barcodeInputPanel.setStyleName("participantsBarcodePanel");
@@ -296,6 +298,10 @@ StartEventPresenter.Display {
 	
 	public Column<EventParticipant, Boolean> getAttendedColumn() {
 		return attendedColumn;
+	}
+	
+	public void setEvent(Event event) {
+		this.titleBar.setText("Telnehmer für '" + event.getName() + "' (" + event.getDate() + " - Kosten: " + event.getCosts() +")");
 	}
 
 }
