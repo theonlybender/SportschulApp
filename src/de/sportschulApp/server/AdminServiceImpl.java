@@ -10,6 +10,7 @@ import de.sportschulApp.server.databanker.DataBankerCourse;
 import de.sportschulApp.server.databanker.DataBankerEvent;
 import de.sportschulApp.server.databanker.DataBankerMember;
 import de.sportschulApp.server.databanker.DataBankerUser;
+import de.sportschulApp.shared.BankAccount;
 import de.sportschulApp.shared.Belt;
 import de.sportschulApp.shared.Course;
 import de.sportschulApp.shared.CourseTariff;
@@ -197,5 +198,9 @@ AdminService {
 	public ArrayList<String> getMemberCourses(int course, float tariff) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public ArrayList<BankAccount> getBankAccounts() {
+		return dbm.getBankAccounts();
 	}
 }

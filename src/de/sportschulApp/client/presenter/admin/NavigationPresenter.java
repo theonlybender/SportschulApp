@@ -30,6 +30,7 @@ public class NavigationPresenter implements Presenter{
 		HasClickHandlers getMenuMembersShowMembers();
 		HasClickHandlers getMenuSystemCreateUser();
 		HasClickHandlers getMenuSystemShowUsers();
+		HasClickHandlers getMenuBankAccount();
 	}
 
 	private final Display display;
@@ -105,6 +106,12 @@ public class NavigationPresenter implements Presenter{
 		display.getMenuSystemShowUsers().addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 				History.newItem("adminSystemShowUsers");
+			}
+		});
+		
+		display.getMenuBankAccount().addClickHandler(new ClickHandler() {
+			public void onClick(ClickEvent event) {
+				History.newItem("adminMembersShowBankAccounts");
 			}
 		});
 
