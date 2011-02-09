@@ -241,13 +241,11 @@ public class EditEventParticipantsPresenter implements Presenter{
 		}
 
 		rpcService.setEventParticipants(Integer.valueOf(eventID), participants, new AsyncCallback<Void>() {
-			@Override
 			public void onFailure(Throwable caught) {
 				Window.alert("Fehler beim speichern der Teilnehmer");
 
 			}
 
-			@Override
 			public void onSuccess(Void result) {
 				History.newItem("adminEventsShowEvents");
 			}

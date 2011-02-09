@@ -546,7 +546,7 @@ public class DataBankerMember implements DataBankerMemberInterface {
 				member.setAccountNumber(rs.getString("accountNumber"));
 				member.setBankName(rs.getString("bankName"));
 				member.setBankNumber(rs.getString("bankNumber"));
-				
+
 				ArrayList<Integer> courses = new ArrayList<Integer>();
 				ArrayList<Integer> graduation = new ArrayList<Integer>();
 				ArrayList<Float> tariffs = new ArrayList<Float>();
@@ -788,7 +788,6 @@ public class DataBankerMember implements DataBankerMemberInterface {
 		return false;
 
 	}
-	
 
 	/**
 	 * �ndert einen Mitgliedereintrag
@@ -903,9 +902,6 @@ public class DataBankerMember implements DataBankerMemberInterface {
 				account.setBankNumber(rs.getString("bankNumber"));
 				account.setAccountNumber(rs.getString("accountNumber"));
 
-				
-				
-				
 				accountList.add(account);
 			}
 			rs.close();
@@ -920,5 +916,34 @@ public class DataBankerMember implements DataBankerMemberInterface {
 		return accountList;
 	}
 
-	
+	public double getContribution(int barcodeId) {
+
+		double result = 0;
+
+		ResultSet rs = null;
+
+		DataBankerConnection dbc = new DataBankerConnection();
+		Statement stmt = dbc.getStatement();
+		String query = "SELECT SUM(tariff) FROM Member_has_courses WHERE barcode_id ='"
+				+ barcodeId + "'";
+
+		try {
+			rs = stmt.executeQuery(query);
+			if (rs.wasNull()) {
+			}
+			while (rs.next()) {
+				result = rs.getDouble(1);
+			}
+			rs.close();
+			dbc.close();
+			stmt.close();
+			dbc.closeStatement();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			return 0;
+		}
+		return result;
+	}
+
 }

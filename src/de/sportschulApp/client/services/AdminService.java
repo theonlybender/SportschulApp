@@ -93,6 +93,6 @@ public interface AdminService extends RemoteService {
 
 	ArrayList<String> getMemberCourses(int course, float tariff);
 
-	ArrayList<BankAccount> getBankAccounts();
+	String getBankAccounts() throws Exception;
 
 }
