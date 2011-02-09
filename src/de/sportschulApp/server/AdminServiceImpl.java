@@ -1,6 +1,9 @@
 package de.sportschulApp.server;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
@@ -10,6 +13,8 @@ import de.sportschulApp.server.databanker.DataBankerCourse;
 import de.sportschulApp.server.databanker.DataBankerEvent;
 import de.sportschulApp.server.databanker.DataBankerMember;
 import de.sportschulApp.server.databanker.DataBankerUser;
+import de.sportschulApp.server.dtaus.CSatz;
+import de.sportschulApp.server.dtaus.DtausDateiWriter;
 import de.sportschulApp.shared.BankAccount;
 import de.sportschulApp.shared.Belt;
 import de.sportschulApp.shared.Course;
@@ -21,7 +26,7 @@ import de.sportschulApp.shared.User;
 
 @SuppressWarnings("serial")
 public class AdminServiceImpl extends RemoteServiceServlet implements
-AdminService {
+		AdminService {
 
 	DataBankerCourse dbc = new DataBankerCourse();
 	DataBankerEvent dbe = new DataBankerEvent();
@@ -122,7 +127,6 @@ AdminService {
 		return dbe.getEventList();
 	}
 
-	@Override
 	public ArrayList<EventParticipant> getEventParticipants(int eventID) {
 		return dbe.getEventParticipants(eventID, dbm.getMemberList());
 	}
@@ -158,9 +162,9 @@ AdminService {
 	}
 
 	public String saveMember(Member member) {
-		System.out.println("Member Courses: "+member.getCourses());
-		System.out.println("Member Grades: "+member.getGraduations());
-		System.out.println("Member Tariffs: "+member.getTariffs());
+		System.out.println("Member Courses: " + member.getCourses());
+		System.out.println("Member Grades: " + member.getGraduations());
+		System.out.println("Member Tariffs: " + member.getTariffs());
 		return dbm.createMember(member);
 
 	}
@@ -169,13 +173,13 @@ AdminService {
 		return dbu.createUser(user);
 	}
 
-	public ArrayList<Member> searchMember(String searchQuery){
-		return dbm.search(searchQuery);}
+	public ArrayList<Member> searchMember(String searchQuery) {
+		return dbm.search(searchQuery);
+	}
 
-	@Override
 	public void setEventParticipants(int eventID,
 			ArrayList<EventParticipant> participants) {
-		dbe.setParticipantsForEvent(eventID,participants);
+		dbe.setParticipantsForEvent(eventID, participants);
 	}
 
 	public void updateCourse(Course course) {
@@ -185,13 +189,13 @@ AdminService {
 	public Integer updateEvent(Event event) {
 		return dbe.updateEvent(event);
 	}
-	
-	public ArrayList<CourseTariff> getTariff(String courseName){
+
+	public ArrayList<CourseTariff> getTariff(String courseName) {
 		return dbc.getCourseTariffsForCourse(courseName);
-		
+
 	}
-	
-	public String updateMember(Member member){
+
+	public String updateMember(Member member) {
 		return dbm.updateMember(member);
 	}
 
@@ -200,7 +204,66 @@ AdminService {
 		return null;
 	}
 
-	public ArrayList<BankAccount> getBankAccounts() {
-		return dbm.getBankAccounts();
+	public String getBankAccounts() {
+		String fileName = "dtaus/dtaus0.txt";
+
+		ArrayList<BankAccount> accounts = dbm.getBankAccounts();
+		// initialisierung
+		FileOutputStream fos;
+		try {
+			fos = new FileOutputStream(fileName);
+
+			DtausDateiWriter dtausDateiWriter = new DtausDateiWriter(fos);
+
+			// Jetzt wird der ASatz gefüllt und geschrieben:
+			dtausDateiWriter.setAGutschriftLastschrift("LK");
+			dtausDateiWriter.setABLZBank(53250000);
+			dtausDateiWriter.setAKundenname("Michael Moeller");
+			dtausDateiWriter.setAKonto(3002201);
+		//	Date aDat = new Date();
+		//	aDat.setDate(15);
+		//	aDat.setMonth(1);
+		//	dtausDateiWriter.setAAusfuehrungsdatum(aDat);
+			dtausDateiWriter.writeASatz();
+
+			// Ab hier werden die eigentlichen Zahlungssätze erstellt:
+
+			Iterator itr = accounts.iterator();
+
+			while (itr.hasNext()) {
+				BankAccount test = (BankAccount) itr.next();
+				dtausDateiWriter.setCBLZEndbeguenstigt(Integer.parseInt(test
+						.getBankNumber()));
+				dtausDateiWriter.setCKonto(Integer.parseInt(test
+						.getAccountNumber()));
+				dtausDateiWriter
+						.setCTextschluessel(CSatz.TS_LASTSCHRIFT_EINZUGSERMAECHTIGUNGSVERFAHREN);
+				dtausDateiWriter.setCInterneKundennummer(test.getBarcodeId());
+				dtausDateiWriter.setCBetragInEuro(dbm.getContribution(test
+						.getBarcodeId()));
+
+				String name = test.getForename() + " " + test.getSurname();
+				name = name.replace("ä", "ae");
+				name = name.replace("ö", "oe");
+				name = name.replace("ü", "ue");
+				name = name.replace("Ä", "Ae");
+				name = name.replace("Ö", "Oe");
+				name = name.replace("Ü", "Ue");
+
+				dtausDateiWriter.setCName(name);
+				dtausDateiWriter.addCVerwendungszweck("Monatlicher Beitrag");
+				dtausDateiWriter.writeCSatz();
+			}
+			// E-Satz schreiben = Ende einer logischen Datei.<br>
+			dtausDateiWriter.writeESatz();
+
+			dtausDateiWriter.close();
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return fileName;
 	}
 }

@@ -43,4 +43,8 @@ public class TrainerPanelView extends Composite implements TrainerPanelPresenter
 	public HasWidgets getNavigationContainer() {
 		return navigationContainer;
 	}
+	
+	public VerticalPanel getContainer(){
+		return navigationContainer;
+	}
 }

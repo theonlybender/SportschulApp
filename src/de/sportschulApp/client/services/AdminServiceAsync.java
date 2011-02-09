@@ -101,6 +101,6 @@ public interface AdminServiceAsync {
 			AsyncCallback<ArrayList<String>> asyncCallback);
 
 	void getBankAccounts(
-			AsyncCallback<ArrayList<de.sportschulApp.shared.BankAccount>> asyncCallback);
+			AsyncCallback<String> asyncCallback);
 	
 }

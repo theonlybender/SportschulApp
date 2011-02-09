@@ -769,8 +769,8 @@ public class CreateMemberPresenter implements Presenter {
 						"validationFailedBorder")));
 
 		validator.addValidators("Banknumber",
-				new IntegerValidator(display.getBankNumberTextBox(), 0,
-						Integer.MAX_VALUE).addActionForFailure(new StyleAction(
+				new StringLengthValidator(display.getBankNumberTextBox(), 1,
+						8).addActionForFailure(new StyleAction(
 						"validationFailedBorder")));
 
 		popupDesc.addDescription("forename ", display.getForenameTextBox());

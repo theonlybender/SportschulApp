@@ -84,12 +84,10 @@ public class ShowBeltPresenter implements Presenter{
 	private void doRenameBelt() {
 		rpcService.renameBeltByID(new Belt(belt.getBeltID(), display.getBeltTextBox().getValue()), new AsyncCallback<Void>() {
 
-			@Override
 			public void onFailure(Throwable caught) {
 				// TODO Auto-generated method stub
 
 			}
-			@Override
 			public void onSuccess(Void result) {
 				History.fireCurrentHistoryState();
 
@@ -102,7 +100,6 @@ public class ShowBeltPresenter implements Presenter{
 			public void onFailure(Throwable caught) {
 				Window.alert("Fehler beim laden der Gurtfarbe");
 			}
-			@Override
 			public void onSuccess(Belt result) {
 				belt = result;
 				display.setData(result);

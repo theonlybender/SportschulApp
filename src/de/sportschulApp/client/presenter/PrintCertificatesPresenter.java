@@ -55,19 +55,24 @@ public class PrintCertificatesPresenter implements Presenter {
 		TextBox getLocationTextBox();
 		TextBox getDateTextBox();
 		TextBox getExaminersTextBox();
+		VerticalPanel getEvenWrapper();
+		void newPrintMemberEntry(String location, String date, String examiners, String forename, String surename,
+				String gradeAfterExam);
 	}
 
 	private final Display display;
 	private String eventID;
 	private DialogBox participantEditor;
 	private LocalizationConstants constants;
+	private VerticalPanel navigationContainer;
 	private ArrayList<EventParticipant> allParticipants = new ArrayList<EventParticipant>();
 	private TrainerServiceAsync rpcService = GWT.create(TrainerService.class);
 	
 	
-	public PrintCertificatesPresenter(HandlerManager eventBus, Display display, String eventID, LocalizationConstants constants) {
+	public PrintCertificatesPresenter(HandlerManager eventBus, Display display, String eventID, LocalizationConstants constants, VerticalPanel navigationContainer) {
 		this.display = display;
 		this.eventID = eventID;
+		this.navigationContainer = navigationContainer;
 		bind();
 		fetchEventData();
 		fetchListData();
@@ -80,14 +85,22 @@ public class PrintCertificatesPresenter implements Presenter {
 				String date = display.getDateTextBox().getText();
 				String examiners = display.getExaminersTextBox().getText();
 				
+				navigationContainer.setStyleName("printLayoutDisplay");
+				display.getEvenWrapper().clear();
+				display.getEvenWrapper().setStyleName("printWrapper");
+				
 				ArrayList<EventParticipant> participantsToPrint = new ArrayList<EventParticipant>();
 				for (int i = 0; i < display.getListProvider().getList().size(); i++) {
 					if (display.getListProvider().getList().get(i).getPassed().equals("Print")) {
 						participantsToPrint.add(display.getListProvider().getList().get(i));
-						Window.alert(location + "," + date + " - " + examiners + " ### " + display.getListProvider().getList().get(i).getForename() + " " + display.getListProvider().getList().get(i).getSurname() + " (" + display.getListProvider().getList().get(i).getGradeAfterExam() + ")");
+						display.newPrintMemberEntry(location, date, examiners, display.getListProvider().getList().get(i).getForename(), display.getListProvider().getList().get(i).getSurname(), display.getListProvider().getList().get(i).getGradeAfterExam());
+
 					}
-				}		
-				Window.open("buh", "huhu", "hm");
+				}			
+				
+				
+
+
 			}
 		});
 		

@@ -20,7 +20,7 @@ public class AdminPanelView extends Composite implements AdminPanelPresenter.Dis
 
 		navigationContainer = new VerticalPanel();
 		navigationContainer.setWidth("100%");
-
+		
 		contentContainer = new VerticalPanel();
 		contentContainer.setSize("100%", "100%");
 
@@ -43,4 +43,10 @@ public class AdminPanelView extends Composite implements AdminPanelPresenter.Dis
 	public HasWidgets getNavigationContainer() {
 		return navigationContainer;
 	}
+
+	public VerticalPanel getContainer() {
+		return navigationContainer;
+	}
+	
+
 }

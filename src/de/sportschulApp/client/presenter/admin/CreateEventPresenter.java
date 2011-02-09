@@ -103,11 +103,9 @@ public class CreateEventPresenter implements Presenter {
 								if (!(editItem)) {
 									newEvent.setEventID(0);
 									rpcService.createEvent(newEvent, new AsyncCallback<Integer>() {
-										@Override
 										public void onFailure(Throwable caught) {
 											Window.alert("Anlegen des Events fehlgeschlagen!");
 										}
-										@Override
 										public void onSuccess(Integer result) {
 											History.newItem("adminEventsEditParticipants:" + result);
 										}
@@ -116,11 +114,9 @@ public class CreateEventPresenter implements Presenter {
 									newEvent.setEventID(Integer.valueOf(eventID));
 
 									rpcService.updateEvent(newEvent, new AsyncCallback<Integer>() {
-										@Override
 										public void onFailure(Throwable caught) {
 											Window.alert("Bearbeiten des Events fehlgeschlagen!");
 										}
-										@Override
 										public void onSuccess(Integer result) {
 											History.newItem("adminEventsEditParticipants:" + result);
 										}
@@ -152,7 +148,6 @@ public class CreateEventPresenter implements Presenter {
 			public void onFailure(Throwable caught) {
 				Window.alert("Fehler beim abfragen der Eventdaten.");
 			}
-			@Override
 			public void onSuccess(Event result) {
 				display.fillForm(result);
 			}

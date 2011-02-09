@@ -4,6 +4,7 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.shared.HandlerManager;
 import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.ui.HasWidgets;
+import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 
 import de.sportschulApp.client.presenter.admin.CreateEventPresenter;
@@ -34,6 +35,8 @@ public class TrainerPanelPresenter implements Presenter {
 		HasWidgets getContentContainer();
 
 		HasWidgets getNavigationContainer();
+		
+		VerticalPanel getContainer();
 	}
 
 	private LocalizationConstants constants;
@@ -79,7 +82,7 @@ public class TrainerPanelPresenter implements Presenter {
 		} else if ((token.length() >= "trainerPrintCertificates".length()) && (token.subSequence(0, 24).equals("trainerPrintCertificates"))) {
 			String eventID = token.substring(25);
 			navigationPresenter = new TrainerNavigationPresenter(eventBus, new TrainerNavigationView(0, constants));
-			contentPresenter =  new PrintCertificatesPresenter(eventBus, new PrintCertificatesView(constants), eventID, constants);
+			contentPresenter =  new PrintCertificatesPresenter(eventBus, new PrintCertificatesView(constants), eventID, constants, display.getContainer());
 		} else {
 			navigationPresenter = new TrainerNavigationPresenter(eventBus, new TrainerNavigationView(0, constants));
 			contentPresenter =  new NewTrainingPresenter(rpcService, eventBus, new NewTrainingView(constants));

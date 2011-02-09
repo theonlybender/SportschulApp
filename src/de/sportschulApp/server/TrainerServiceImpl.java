@@ -85,7 +85,6 @@ TrainerService {
 	public void abortEvent(int eventID) {
 		dbe.abortEvent(eventID);
 	}
-	@Override
 	public Event getEventByEventID(int eventID) {
 		return dbe.getEvent(eventID);
 	}
