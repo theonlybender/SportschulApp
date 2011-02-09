@@ -17,12 +17,17 @@ import de.sportschulApp.shared.Member;
 public class ShowMemberView extends Composite implements
 ShowMemberPresenter.Display {
 
+	private Label bankAccountName = new Label();
+	private Label accountNumber = new Label();
+	private Label bankName = new Label();
+	private Label bankNumber = new Label();
 	private Label barcodeIDLabel = new Label();
 	private Label beltSizeLabel = new Label();
 	private Label birthContainer = new Label();
 	private Label cityLabel = new Label();
 	private Label coursesLabel = new Label();
 	private Label deleteLabel;
+	private Label diseasesLabel;
 	private Label editLabel;
 	private Label emailLabel = new Label();
 	private Label faxLabel = new Label();
@@ -108,6 +113,16 @@ ShowMemberPresenter.Display {
 		secondaryDetailsData.setWidget(6, 1, beltSizeLabel);
 		secondaryDetailsData.setWidget(7, 0, new Label(constants.note() + ":"));
 		secondaryDetailsData.setWidget(7, 1, noteLabel);
+		secondaryDetailsData.setWidget(8, 0, new Label("Krankheiten: "));
+		secondaryDetailsData.setWidget(8, 1, diseasesLabel);
+		secondaryDetailsData.setWidget(9, 0, new Label("Kontoinhaber: "));
+		secondaryDetailsData.setWidget(9, 1, bankAccountName);
+		secondaryDetailsData.setWidget(10, 0, new Label("Kontonummer: "));
+		secondaryDetailsData.setWidget(10, 1, accountNumber);
+		secondaryDetailsData.setWidget(11, 0, new Label("Bankleitzahl: "));
+		secondaryDetailsData.setWidget(11, 1, bankNumber);
+		secondaryDetailsData.setWidget(12, 0, new Label("Bankname: "));
+		secondaryDetailsData.setWidget(12, 1, bankName);
 
 		memberPanel.add(primaryDetailsPanel);
 		memberPanel.add(secondaryDetailsData);
@@ -151,8 +166,11 @@ ShowMemberPresenter.Display {
 		beltSizeLabel.setText(member.getBeltsize());
 		noteLabel.setText(member.getNote());
 		trainingUnitsLabel.setText(member.getTrainingunits() + "");
-
+		diseasesLabel.setText(member.getDiseases());
+		bankAccountName.setText(member.getAccountForename() + " " + member.getAccountSurname());
+		accountNumber.setText(member.getAccountNumber());
+		bankName.setText(member.getBankName());
+		bankNumber.setText(member.getBankName());
 		memberPicture.setUrl(member.getPicture());
-
 	}
 }
