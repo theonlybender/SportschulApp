@@ -11,6 +11,6 @@
 	<classpathentry kind="lib" path="war/WEB-INF/lib/activation-1.1.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/gwt-vl-3.0.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/gwt-dnd-3.0.1.jar"/>
-	<classpathentry kind="lib" path="/Users/georgortwein/Dropbox/MM-Sportschule/für geo/datusCreatorTest_2/obantoo-bin-1.4.11.jar"/>
+	<classpathentry kind="lib" path="/Users/theonlybender/Documents/workspace/SportschulApp/war/WEB-INF/lib/obantoo-bin-1.4.11.jar"/>
 	<classpathentry kind="output" path="war/WEB-INF/classes"/>
 </classpath>

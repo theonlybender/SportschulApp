@@ -234,7 +234,6 @@ public class DataBankerMember implements DataBankerMemberInterface {
 				member.setAccountNumber(rs.getString("accountNumber"));
 				member.setBankName(rs.getString("bankName"));
 				member.setBankNumber(rs.getString("bankNumber"));
-
 			}
 
 			ArrayList<Integer> courses = new ArrayList<Integer>();

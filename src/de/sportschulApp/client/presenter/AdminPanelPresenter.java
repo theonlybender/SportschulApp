@@ -254,9 +254,9 @@ public class AdminPanelPresenter implements Presenter {
 		DialogBox memberPopup = new DialogBox(true);
 		memberPopup.setAnimationEnabled(true);
 		memberPopup.setText("Detailansicht");
-		memberPopup.setGlassEnabled(true);
+		memberPopup.setGlassEnabled(false);
 		memberPopup.center();
-		memberPopup.setPopupPosition(memberPopup.getAbsoluteLeft() - 200, memberPopup.getAbsoluteTop() - 150);
+		memberPopup.setPopupPosition(memberPopup.getAbsoluteLeft() - 200, memberPopup.getAbsoluteTop() - 250);
 		memberPopup.setWidth("auto");
 		Presenter showMemberPresenter = null;
 		showMemberPresenter =  new ShowMemberPresenter(rpcService, eventBus, new ShowMemberView(constants), barcodeID, memberPopup);

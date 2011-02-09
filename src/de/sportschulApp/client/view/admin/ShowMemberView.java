@@ -17,17 +17,12 @@ import de.sportschulApp.shared.Member;
 public class ShowMemberView extends Composite implements
 ShowMemberPresenter.Display {
 
-	private Label bankAccountName = new Label();
-	private Label accountNumber = new Label();
-	private Label bankName = new Label();
-	private Label bankNumber = new Label();
 	private Label barcodeIDLabel = new Label();
 	private Label beltSizeLabel = new Label();
 	private Label birthContainer = new Label();
 	private Label cityLabel = new Label();
 	private Label coursesLabel = new Label();
 	private Label deleteLabel;
-	private Label diseasesLabel;
 	private Label editLabel;
 	private Label emailLabel = new Label();
 	private Label faxLabel = new Label();
@@ -43,6 +38,12 @@ ShowMemberPresenter.Display {
 	private Label trainingUnitsLabel = new Label();
 	private Label zipcodeLabel = new Label();
 	private Label closeLabel;
+	private Label bankAccoutNameLabel = new Label();
+	private Label bankAccountNumberLabel = new Label();
+	private Label bankAccountBankNameLabel = new Label();
+	private Label bankAccountBankNumberLabel = new Label();
+	private Label diseasesLabel = new Label();
+	private Label costsLabel = new Label();
 
 	public ShowMemberView(LocalizationConstants constants) {
 		VerticalPanel memberPanel = new VerticalPanel();
@@ -115,14 +116,16 @@ ShowMemberPresenter.Display {
 		secondaryDetailsData.setWidget(7, 1, noteLabel);
 		secondaryDetailsData.setWidget(8, 0, new Label("Krankheiten: "));
 		secondaryDetailsData.setWidget(8, 1, diseasesLabel);
-		secondaryDetailsData.setWidget(9, 0, new Label("Kontoinhaber: "));
-		secondaryDetailsData.setWidget(9, 1, bankAccountName);
-		secondaryDetailsData.setWidget(10, 0, new Label("Kontonummer: "));
-		secondaryDetailsData.setWidget(10, 1, accountNumber);
-		secondaryDetailsData.setWidget(11, 0, new Label("Bankleitzahl: "));
-		secondaryDetailsData.setWidget(11, 1, bankNumber);
-		secondaryDetailsData.setWidget(12, 0, new Label("Bankname: "));
-		secondaryDetailsData.setWidget(12, 1, bankName);
+		secondaryDetailsData.setWidget(9, 0, new Label("Beitrag: "));
+		secondaryDetailsData.setWidget(9, 1, costsLabel);
+		secondaryDetailsData.setWidget(10, 0, new Label("Kontoinhaber: "));
+		secondaryDetailsData.setWidget(10, 1, bankAccoutNameLabel);
+		secondaryDetailsData.setWidget(11, 0, new Label("Kontonummer: "));
+		secondaryDetailsData.setWidget(11, 1, bankAccountNumberLabel);
+		secondaryDetailsData.setWidget(12, 0, new Label("Bankleitzahl: "));
+		secondaryDetailsData.setWidget(12, 1, bankAccountBankNumberLabel);
+		secondaryDetailsData.setWidget(13, 0, new Label("Bankname: "));
+		secondaryDetailsData.setWidget(13, 1, bankAccountBankNameLabel);
 
 		memberPanel.add(primaryDetailsPanel);
 		memberPanel.add(secondaryDetailsData);
@@ -165,12 +168,18 @@ ShowMemberPresenter.Display {
 				+ member.getBirthMonth() + "." + member.getBirthYear());
 		beltSizeLabel.setText(member.getBeltsize());
 		noteLabel.setText(member.getNote());
-		trainingUnitsLabel.setText(member.getTrainingunits() + "");
 		diseasesLabel.setText(member.getDiseases());
-		bankAccountName.setText(member.getAccountForename() + " " + member.getAccountSurname());
-		accountNumber.setText(member.getAccountNumber());
-		bankName.setText(member.getBankName());
-		bankNumber.setText(member.getBankName());
+		trainingUnitsLabel.setText(member.getTrainingunits() + "");
+		bankAccoutNameLabel.setText(member.getAccountForename() + " " + member.getAccountSurname());
+		bankAccountNumberLabel.setText(member.getAccountNumber());
+		bankAccountBankNumberLabel.setText(member.getBankNumber());
+		bankAccountBankNameLabel.setText(member.getBankName());
 		memberPicture.setUrl(member.getPicture());
+		
+		float memberCostsTemp = 0;
+		for (int i = 0; i < member.getTariffs().size(); i++) {
+			memberCostsTemp += member.getTariffs().get(i);
+		}
+		costsLabel.setText(memberCostsTemp + " €");
 	}
 }
