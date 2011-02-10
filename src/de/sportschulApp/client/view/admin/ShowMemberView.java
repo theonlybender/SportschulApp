@@ -180,6 +180,9 @@ ShowMemberPresenter.Display {
 		for (int i = 0; i < member.getTariffs().size(); i++) {
 			memberCostsTemp += member.getTariffs().get(i);
 		}
-		costsLabel.setText(memberCostsTemp + " €");
+		String tmp = String.valueOf(memberCostsTemp);
+		int index = tmp.indexOf(".");
+		tmp.substring(index+2);
+		costsLabel.setText(tmp + " €");
 	}
 }

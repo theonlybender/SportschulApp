@@ -176,9 +176,9 @@ public class NewTrainingView extends Composite implements
 			public String getValue(Member object) {
 				if ((object.getTrainingUnitsInMonth() + 1) <= object
 						.getTrainingunits()) {
-					return "/imgs/thumbs-up.png";
+					return "imgs/thumbs-up.png";
 				} else {
-					return "/imgs/thumbs-down.png";
+					return "imgs/thumbs-down.png";
 
 				}
 			}
