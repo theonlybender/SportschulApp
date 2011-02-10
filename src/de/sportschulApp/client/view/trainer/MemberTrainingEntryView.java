@@ -155,7 +155,7 @@ MemberTrainingEntryPresenter.Display {
 			} else {
 
 			}
-		} catch (NullPointerException e) {
+		} catch (Exception e) {
 		}
 
 		// geburtstags erinnerung

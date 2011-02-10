@@ -431,7 +431,7 @@ public class CreateMemberPresenter implements Presenter {
 								if (member.getPicture() == null) {
 									member.setPicture("imgs/standartMember.jpg");
 								}
-							} catch (NullPointerException e) {
+							} catch (Exception e) {
 							}
 							if (createView) {
 

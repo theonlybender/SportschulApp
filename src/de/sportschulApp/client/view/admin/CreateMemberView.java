@@ -830,7 +830,7 @@ public class CreateMemberView extends Composite implements
 				temp3 = temp3 + Integer.parseInt(temp.substring(0, temp2));
 
 			}
-		} catch (IndexOutOfBoundsException e) {
+		} catch (Exception e) {
 		}
 		return temp3;
 	}

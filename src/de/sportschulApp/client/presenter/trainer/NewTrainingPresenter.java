@@ -162,7 +162,7 @@ public class NewTrainingPresenter implements Presenter {
 										display.getBarcodeTextBox()
 										.getText()
 										.length());
-							} catch (NullPointerException e) {
+							} catch (Exception e) {
 							}
 						}
 

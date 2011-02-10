@@ -113,13 +113,13 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 
 	public void onValueChange(ValueChangeEvent<String> event) {
 		String token = event.getValue();
-
+		
 		if (token != null) {
 			presenter = null;
 
 			if (token.equals("login")) {
 				presenter = new LoginPresenter(rpcService, eventBus,
-						new LoginView(constants));
+						new LoginView());
 			} else {
 				try {
 					if (!Cookies.getCookie("SportschuleUserName").isEmpty()) {
@@ -139,11 +139,11 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 						}
 					} else {
 						presenter = new LoginPresenter(rpcService, eventBus,
-								new LoginView(constants));
+								new LoginView());
 					}
-				} catch (NullPointerException e) {
+				} catch (Exception e) {
 					presenter = new LoginPresenter(rpcService, eventBus,
-							new LoginView(constants));
+							new LoginView());
 				}
 			}
 

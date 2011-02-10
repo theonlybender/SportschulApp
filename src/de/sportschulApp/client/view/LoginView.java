@@ -4,6 +4,7 @@ import com.google.gwt.event.dom.client.HasChangeHandlers;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.event.dom.client.HasKeyUpHandlers;
 import com.google.gwt.user.client.Cookies;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HasValue;
 import com.google.gwt.user.client.ui.HorizontalPanel;
@@ -28,8 +29,7 @@ public class LoginView extends Composite implements LoginPresenter.Display{
 	private Label userNameLabel;
 	private TextBox userNameTextBox;
 
-	public LoginView(LocalizationConstants constants) {
-
+	public LoginView() {
 		VerticalPanel loginPanel = new VerticalPanel();
 		loginPanel.setSize("100%", "100%");
 		initWidget(loginPanel);
@@ -38,51 +38,27 @@ public class LoginView extends Composite implements LoginPresenter.Display{
 		metaHeadPanel.setStyleName("loginMetaHeadPanel");
 		metaHeadPanel.setSize("100%", "28px");
 
-		HorizontalPanel languagePanel = new HorizontalPanel();
-		languagePanel.addStyleName("languagePanel");
-		Label languageLabel = new Label(constants.language() + ": ");
-		languagePicker.addItem("Deutsch");
-		languagePicker.addItem("English");
-		languagePanel.add(languageLabel);
-		languagePanel.add(languagePicker);
-
-		try {
-			if (!Cookies.getCookie("SportschuleLanguage").isEmpty()) {
-				if (Cookies.getCookie("SportschuleLanguage").equals("Deutsch")) {
-					languagePicker.setSelectedIndex(0);
-				}
-				if (Cookies.getCookie("SportschuleLanguage").equals("English")) {
-					languagePicker.setSelectedIndex(1);
-				}
-			}
-		} catch (NullPointerException e) {
-			languagePicker.setSelectedIndex(0);
-		}
-
 		loginErrorLabel.setStyleName("loginErrorLabel");
 		loginErrorLabel.setVisible(false);
 		metaHeadPanel.add(loginErrorLabel);
-//		metaHeadPanel.add(languagePanel);
 
 		HorizontalPanel loginContainer = new HorizontalPanel();
 		loginContainer.setStyleName("loginContainer");
 
-		userNameLabel = new Label(constants.username()+": ");
+		userNameLabel = new Label("Benutzername: ");
 		userNameTextBox = new TextBox();
 		userNameTextBox.setStyleName("loginInput");
-
-		passwordLabel = new Label(constants.password()+": ");
+		passwordLabel = new Label("Passwort: ");
 		passwordTextBox = new PasswordTextBox();
 		passwordTextBox.setStyleName("loginInput");
 
-		loginLabel = new Label(constants.login());
+		loginLabel = new Label("Login");
 		loginLabel.setStyleName("loginLabel");
 
 		loginContainer.add(userNameLabel);
 		loginContainer.add(userNameTextBox);
 		loginContainer.add(passwordLabel);
 		loginContainer.add(passwordTextBox);
-
 		loginContainer.add(loginLabel);
 
 		HorizontalPanel mainHeadPanel = new HorizontalPanel();
@@ -91,7 +67,6 @@ public class LoginView extends Composite implements LoginPresenter.Display{
 		mainHeadPanel.setWidth("100%");
 
 		mainHeadPanel.add(loginContainer);
-
 		Image mmLogo = new Image("imgs/mm-logo.jpg");
 		mmLogo.addStyleName("mm-logo");
 
