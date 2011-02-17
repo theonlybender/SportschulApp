@@ -90,7 +90,7 @@ CreateEventPresenter.Display {
 		examinersInputFieldsTable.setWidget(numRow, 1, examinerTextBox);
 
 		if (!firstField) {
-			Image deleteButton = new Image("/imgs/Symbol_Delete.png");
+			Image deleteButton = new Image("imgs/Symbol_Delete.png");
 			deleteButton.setStyleName("clickable");
 
 			deleteButton.addClickHandler(new ClickHandler() {

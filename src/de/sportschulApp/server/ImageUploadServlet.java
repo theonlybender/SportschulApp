@@ -51,7 +51,7 @@ public class ImageUploadServlet extends UploadAction {
 
 					GregorianCalendar cal = new GregorianCalendar();
 
-					saveName = "uploads/member/" + cal.getTimeInMillis()
+					saveName = "C:/xampp/tomcat/webapps/war/uploads/member/" + cal.getTimeInMillis()
 					+ extension;
 
 					File file = new File(saveName);

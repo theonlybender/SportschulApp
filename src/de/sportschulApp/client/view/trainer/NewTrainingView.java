@@ -46,6 +46,8 @@ public class NewTrainingView extends Composite implements
 	private HashMap<Integer, String> barcodeIDs = new HashMap<Integer, String>();
 	Date today = new Date();
 	protected Integer trainingsPresence;
+	private int count=0;
+	private Label countLabel;
 
 	public NewTrainingView(LocalizationConstants constants) {
 		this.constants = constants;
@@ -64,7 +66,11 @@ public class NewTrainingView extends Composite implements
 		barcodeInputPanel.add(barcodeTextBox);
 		barcodeInputPanel.add(scanButton);
 		barcodeInputPanel.add(scanImage);
-
+		
+		countLabel=new Label("Anwesend: "+count);
+		countLabel.setStyleName("countLabel");
+		barcodeInputPanel.add(countLabel);
+		
 		memberEntryPanel = new VerticalPanel();
 
 		newTrainingWrapper.add(barcodeInputPanel);
@@ -112,6 +118,7 @@ public class NewTrainingView extends Composite implements
 		// TODO
 		listData.add(0, member);
 		setMemberList();
+		incrementCount();
 	}
 
 	public void deleteMemberFromList(int index, int barcodeId) {
@@ -119,8 +126,16 @@ public class NewTrainingView extends Composite implements
 		barcodeIDs.remove(barcodeId);
 		removeTrainingspresence(barcodeId);
 		setMemberList();
+		decrementCount();
 	}
-
+	public void incrementCount(){
+		count = count +1;
+		countLabel.setText("Anwesend: "+count);
+	}
+	public void decrementCount(){
+		count = count -1;
+		countLabel.setText("Anwesend: "+count);
+	}
 	public VerticalPanel createMemberListTable() {
 		cellTable = new CellTable<Member>();
 		cellTable.sinkEvents(Event.ONCLICK);
@@ -178,7 +193,7 @@ public class NewTrainingView extends Composite implements
 						.getTrainingunits()) {
 					return "imgs/thumbs-up.png";
 				} else {
-					return "imgs/thumbs-down.png";
+					return "ximgs/thumbs-down.png";
 
 				}
 			}

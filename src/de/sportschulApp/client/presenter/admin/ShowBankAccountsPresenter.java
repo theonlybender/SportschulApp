@@ -7,6 +7,7 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.event.shared.HandlerManager;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -21,6 +22,8 @@ public class ShowBankAccountsPresenter implements Presenter
 		Widget asWidget();
 
 		HasClickHandlers getButton();
+		
+		Anchor getAnchor();
 
 	}
 
@@ -47,7 +50,7 @@ public class ShowBankAccountsPresenter implements Presenter
 					}
 
 					public void onSuccess(String result) {
-						System.out.println("filename: " + result);
+						display.getAnchor().setVisible(true);
 					}
 
 				});

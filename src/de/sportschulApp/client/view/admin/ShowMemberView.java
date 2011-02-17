@@ -15,7 +15,7 @@ import de.sportschulApp.client.view.localization.LocalizationConstants;
 import de.sportschulApp.shared.Member;
 
 public class ShowMemberView extends Composite implements
-ShowMemberPresenter.Display {
+		ShowMemberPresenter.Display {
 
 	private Label barcodeIDLabel = new Label();
 	private Label beltSizeLabel = new Label();
@@ -72,13 +72,13 @@ ShowMemberPresenter.Display {
 		FlexTable primaryDetailsData = new FlexTable();
 		primaryDetailsData.setStyleName("primaryDetailsData");
 		primaryDetailsData
-		.setWidget(0, 0, new Label(constants.barcode() + ":"));
+				.setWidget(0, 0, new Label(constants.barcode() + ":"));
 		primaryDetailsData.setWidget(0, 1, barcodeIDLabel);
 		primaryDetailsData.setWidget(1, 0,
 				new Label(constants.forename() + ":"));
 		primaryDetailsData.setWidget(1, 1, forenameLabel);
 		primaryDetailsData
-		.setWidget(2, 0, new Label(constants.surname() + ":"));
+				.setWidget(2, 0, new Label(constants.surname() + ":"));
 		primaryDetailsData.setWidget(2, 1, surnameLabel);
 		primaryDetailsData.setWidget(3, 0, new Label(constants.birth() + ":"));
 		primaryDetailsData.setWidget(3, 1, birthContainer);
@@ -104,7 +104,7 @@ ShowMemberPresenter.Display {
 		secondaryDetailsData.setWidget(3, 0, new Label(constants.fax() + ":"));
 		secondaryDetailsData.setWidget(3, 1, faxLabel);
 		secondaryDetailsData
-		.setWidget(4, 0, new Label(constants.email() + ":"));
+				.setWidget(4, 0, new Label(constants.email() + ":"));
 		secondaryDetailsData.setWidget(4, 1, emailLabel);
 		secondaryDetailsData.setWidget(5, 0, new Label(constants.homepage()
 				+ ":"));
@@ -143,7 +143,7 @@ ShowMemberPresenter.Display {
 	public HasClickHandlers getEditLabel() {
 		return editLabel;
 	}
-	
+
 	public HasClickHandlers getCloseLabel() {
 		return closeLabel;
 	}
@@ -170,19 +170,20 @@ ShowMemberPresenter.Display {
 		noteLabel.setText(member.getNote());
 		diseasesLabel.setText(member.getDiseases());
 		trainingUnitsLabel.setText(member.getTrainingunits() + "");
-		bankAccoutNameLabel.setText(member.getAccountForename() + " " + member.getAccountSurname());
+		bankAccoutNameLabel.setText(member.getAccountForename() + " "
+				+ member.getAccountSurname());
 		bankAccountNumberLabel.setText(member.getAccountNumber());
 		bankAccountBankNumberLabel.setText(member.getBankNumber());
 		bankAccountBankNameLabel.setText(member.getBankName());
 		memberPicture.setUrl(member.getPicture());
-		
+
 		float memberCostsTemp = 0;
 		for (int i = 0; i < member.getTariffs().size(); i++) {
 			memberCostsTemp += member.getTariffs().get(i);
 		}
 		String tmp = String.valueOf(memberCostsTemp);
 		int index = tmp.indexOf(".");
-		tmp.substring(index+2);
+		tmp = tmp.substring(0, index+3);
 		costsLabel.setText(tmp + " €");
 	}
 }

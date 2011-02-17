@@ -1,12 +1,10 @@
 package de.sportschulApp.client.view.admin;
 
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.HasClickHandlers;
-import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.Hyperlink;
+import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
@@ -17,19 +15,39 @@ import de.sportschulApp.client.view.localization.LocalizationConstants;
 public class ShowBankAccountsView extends Composite implements
 		ShowBankAccountsPresenter.Display {
 
-	Button testButton;
+	Button generateButton;
+	private Anchor anchor;
 
 	public ShowBankAccountsView(LocalizationConstants constants) {
-		VerticalPanel dummyPanel = new VerticalPanel();
-		initWidget(dummyPanel);
+		VerticalPanel bankAccountsWrapper = new VerticalPanel();
+		initWidget(bankAccountsWrapper);
+		bankAccountsWrapper.addStyleName("bankAccountWrapper");
+		
+		VerticalPanel header = new VerticalPanel();
+		header.addStyleName("formWrapper");
+		header.setWidth("100%");
 
-		testButton=new Button("Bankdaten");
-		Label dummyLabel = new Label("Da!");
+		HorizontalPanel formHeader = new HorizontalPanel();
+		formHeader.addStyleName("formHeader");
+		formHeader.add(new Label("Bankdaten"));
 
-	
-		dummyPanel.add(dummyLabel);
-		dummyPanel.add(testButton);
+		
+		generateButton = new Button("Dtaus Datei generieren");
+		Label textLabel = new Label(
+				"Mit einem Klick auf \"Dtaus Datei generieren\" erzeugen Sie eine \"Dtaus\" datei. Diese können Sie mit einem rechtklick auf den erscheinenden Link \"Dtaus speichern\" mittels \"Ziel speichern unter\" auf Ihrem PC sichern.");
 
+		textLabel.setWidth("500px");
+		header.add(formHeader);
+		header.add(textLabel);
+
+		bankAccountsWrapper.add(header);
+		bankAccountsWrapper.add(generateButton);
+		
+		anchor = new Anchor("Dtaus speichern");
+		anchor.setHref("dtaus/dtaus0.txt");
+		anchor.setVisible(false);
+		
+		bankAccountsWrapper.add(anchor);
 	}
 
 	@Override
@@ -38,7 +56,11 @@ public class ShowBankAccountsView extends Composite implements
 	}
 
 	public HasClickHandlers getButton() {
-		return testButton;
+		return generateButton;
+	}
+	
+	public Anchor getAnchor(){
+		return anchor;
 	}
 
 }

@@ -126,7 +126,7 @@ CreateCoursePresenter.Display {
 		dateInputFieldsTable.setWidget(numRow, 2, timeListBox);
 
 		if (!firstField) {
-			final Image deleteButton = new Image("/imgs/Symbol_Delete.png");
+			final Image deleteButton = new Image("imgs/Symbol_Delete.png");
 			deleteButton.setStyleName("clickable");
 
 			deleteButton.addClickHandler(new ClickHandler() {
@@ -201,7 +201,7 @@ CreateCoursePresenter.Display {
 		tariffInputFieldsTable.setWidget(numRow, 3, euroLabel);
 
 		if (!firstField) {
-			Image deleteButton = new Image("/imgs/Symbol_Delete.png");
+			Image deleteButton = new Image("imgs/Symbol_Delete.png");
 			deleteButton.setStyleName("clickable");
 
 			deleteButton.addClickHandler(new ClickHandler() {

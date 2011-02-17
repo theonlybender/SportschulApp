@@ -214,7 +214,7 @@ public class CreateCoursePresenter implements Presenter {
 			@Override
 			public String getDescriptionMessage(String msgKey) {
 				HashMap<String, String> msgMap = new HashMap<String, String>();
-				msgMap.put("courseName", constants.popupHelpCourseName());
+				msgMap.put("courseName", "Geben Sie den Kursnamen an (2-30 Zeichen)");
 				msgMap.put("instructor", constants.popupHelpInstructor());
 				msgMap.put("location", constants.popupHelpLocation());
 

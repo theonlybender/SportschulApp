@@ -80,7 +80,7 @@ public class CreateMemberView extends Composite implements
 			gradeInputPanel.add(gradeLabel);
 			gradeInputPanel.add(gradeListBox);
 
-			deleteButton = new Image("/imgs/Symbol_Delete.png");
+			deleteButton = new Image("imgs/Symbol_Delete.png");
 			deleteButton.setStyleName("clickable");
 			deleteButton.addClickHandler(new ClickHandler() {
 				public void onClick(ClickEvent event) {

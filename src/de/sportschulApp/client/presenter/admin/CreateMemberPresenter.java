@@ -526,6 +526,7 @@ public class CreateMemberPresenter implements Presenter {
 							temp1 = temp1.substring(temp2 + 2,
 									temp1.length() - 2);
 
+							System.out.println("TARIFF: "+result.get(0));
 							if (Float.parseFloat(temp1) == tariff) {
 								display.getCourseList().get(index)
 										.getTariffListBox().setSelectedIndex(i);
