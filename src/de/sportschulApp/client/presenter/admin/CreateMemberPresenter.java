@@ -2,9 +2,11 @@ package de.sportschulApp.client.presenter.admin;
 
 import gwtupload.client.IUploadStatus.Status;
 import gwtupload.client.IUploader;
+import gwtupload.client.IUploader.OnStatusChangedHandler;
 import gwtupload.client.MultiUploader;
 import gwtupload.client.PreloadedImage;
 import gwtupload.client.PreloadedImage.OnLoadPreloadedImageHandler;
+import gwtupload.client.SingleUploader;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -126,7 +128,7 @@ public class CreateMemberPresenter implements Presenter {
 
 		TextBox getSurnameTextBox();
 
-		MultiUploader getUploadHandler();
+		SingleUploader getUploadHandler();
 
 		ValidationProcessor getValidator();
 
@@ -161,10 +163,15 @@ public class CreateMemberPresenter implements Presenter {
 		public void onFinish(IUploader uploader) {
 			if (uploader.getStatus() == Status.SUCCESS) {
 				imageUrl = uploader.getServerResponse();
-				new PreloadedImage(imageUrl, showImage);
+				System.out.println("savename CLIENT 1: "+ imageUrl);
 
+				new PreloadedImage(imageUrl, showImage);
+				//TODO
 			}
+			System.out.println("2testtesttest");
+			
 		}
+		
 	};
 	private PopupDescription popupDesc;
 
@@ -174,7 +181,11 @@ public class CreateMemberPresenter implements Presenter {
 	private OnLoadPreloadedImageHandler showImage = new OnLoadPreloadedImageHandler() {
 		public void onLoad(PreloadedImage image) {
 			image.setWidth("100px");
+			System.out.println("savename CLIENT 2: "+ imageUrl);
+
 			display.setImage(image, imageUrl);
+			
+			//TODO
 		}
 	};
 
@@ -220,6 +231,7 @@ public class CreateMemberPresenter implements Presenter {
 	private void bind() {
 		display.getSendButton().addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
+			
 				boolean success = display.getValidator().validate();
 				if (display.getBirthTextBox1().getSelectedIndex() == 0) {
 					display.getBirthTextBox1().setStyleName(
@@ -270,6 +282,8 @@ public class CreateMemberPresenter implements Presenter {
 
 		display.getUploadHandler().addOnFinishUploadHandler(
 				onFinishUploaderHandler);
+		
+		
 		for (int i = 0; i < 10; i++) {
 			final int test = i;
 			display.getCourseHandler(i).addChangeHandler(new ChangeHandler() {
@@ -427,6 +441,7 @@ public class CreateMemberPresenter implements Presenter {
 									display.getBankNumberTextBox().getText(),
 									result, grades, tariffs);
 
+							//TODO
 							try {
 								if (member.getPicture() == null) {
 									member.setPicture("imgs/standartMember.jpg");
@@ -578,7 +593,6 @@ public class CreateMemberPresenter implements Presenter {
 					public void onSuccess(ArrayList<String> result) {
 						display.setBeltList(test, result);
 
-						// TODO
 						System.out
 								.println("GRADUATION:" + graduation + ":test");
 
@@ -635,7 +649,6 @@ public class CreateMemberPresenter implements Presenter {
 				getTariffListForEdit(index1, tariff);
 				getBeltListForEdit(index1, graduation);
 
-				// TODO
 			}
 
 		});

@@ -1,5 +1,5 @@
 function sportschulapp(){
-  var $intern_0 = '', $intern_34 = '" for "gwt:onLoadErrorFn"', $intern_32 = '" for "gwt:onPropertyErrorFn"', $intern_15 = '"><\/script>', $intern_17 = '#', $intern_42 = '&', $intern_71 = '.cache.html', $intern_19 = '/', $intern_59 = '1E5973469A89CD542A7FBD83CB42776C', $intern_61 = '299D27CBD5EA6157C5D9BEF4F823D9E2', $intern_62 = '3375C87E134090C48AFAD7C811CB43DB', $intern_63 = '54AB2569E746D50AA1C7325FB7B503B2', $intern_64 = '569459C98E733D985494E011634ADD9D', $intern_65 = '6DFB3EEC6A5715766DA1F290E746A5B9', $intern_66 = '8B0F2E43BF4EFBAFB89F148A90458BF5', $intern_67 = '9B16517E9B8DE291CD974870C49738DA', $intern_70 = ':', $intern_26 = '::', $intern_80 = '<script defer="defer">sportschulapp.onInjectionDone(\'sportschulapp\')<\/script>', $intern_14 = '<script id="', $intern_29 = '=', $intern_18 = '?', $intern_31 = 'Bad handler "', $intern_68 = 'DDD7938A9EA77F1D9C5B16A61317CB2A', $intern_79 = 'DOMContentLoaded', $intern_69 = 'F2E6170C8CACC484C579D81EBA1EBD73', $intern_16 = 'SCRIPT', $intern_45 = 'Unexpected exception in locale detection, using default: ', $intern_78 = 'Upload.css', $intern_44 = '_', $intern_43 = '__gwt_Locale', $intern_13 = '__gwt_marker_sportschulapp', $intern_20 = 'base', $intern_10 = 'baseUrl', $intern_4 = 'begin', $intern_3 = 'bootstrap', $intern_22 = 'clear.cache.gif', $intern_28 = 'content', $intern_60 = 'de', $intern_40 = 'default', $intern_9 = 'end', $intern_53 = 'gecko', $intern_54 = 'gecko1_8', $intern_5 = 'gwt.codesvr=', $intern_6 = 'gwt.hosted=', $intern_7 = 'gwt.hybrid', $intern_72 = 'gwt/standard/standard.css', $intern_33 = 'gwt:onLoadErrorFn', $intern_30 = 'gwt:onPropertyErrorFn', $intern_27 = 'gwt:property', $intern_77 = 'head', $intern_57 = 'hosted.html?sportschulapp', $intern_76 = 'href', $intern_52 = 'ie6', $intern_51 = 'ie8', $intern_35 = 'iframe', $intern_21 = 'img', $intern_36 = "javascript:''", $intern_73 = 'link', $intern_56 = 'loadExternalRefs', $intern_39 = 'locale', $intern_41 = 'locale=', $intern_23 = 'meta', $intern_38 = 'moduleRequested', $intern_8 = 'moduleStartup', $intern_50 = 'msie', $intern_24 = 'name', $intern_47 = 'opera', $intern_37 = 'position:absolute;width:0;height:0;border:none', $intern_74 = 'rel', $intern_49 = 'safari', $intern_11 = 'script', $intern_58 = 'selectingPermutation', $intern_1 = 'sportschulapp', $intern_12 = 'sportschulapp.nocache.js', $intern_25 = 'sportschulapp::', $intern_2 = 'startup', $intern_75 = 'stylesheet', $intern_55 = 'unknown', $intern_46 = 'user.agent', $intern_48 = 'webkit';
+  var $intern_0 = '', $intern_34 = '" for "gwt:onLoadErrorFn"', $intern_32 = '" for "gwt:onPropertyErrorFn"', $intern_15 = '"><\/script>', $intern_17 = '#', $intern_42 = '&', $intern_73 = '.cache.html', $intern_19 = '/', $intern_60 = '04D85A7CA0B42E9AF9D7FC09742C2BBC', $intern_61 = '05CBFB89979BE3E2C9ADBBC7E0EC1412', $intern_62 = '252937ADAFF561599CEB1D5C4011D23E', $intern_63 = '49E9F353892964158EEDD7F4F86AEE94', $intern_64 = '712E9566D0EE1E0EDD4E2573BC4BD0A9', $intern_65 = '86EA4B23F78C0E182EB20A4A3CF1F4AA', $intern_66 = '8C97D30F2F17D3CFC81D2258E25A09B5', $intern_67 = '9EFA8D13A20D5931DCD3619EDCE8B059', $intern_72 = ':', $intern_26 = '::', $intern_82 = '<script defer="defer">sportschulapp.onInjectionDone(\'sportschulapp\')<\/script>', $intern_14 = '<script id="', $intern_29 = '=', $intern_18 = '?', $intern_68 = 'A113B80270E90105EDA310AB23981E13', $intern_69 = 'AF5582EA72BE9CF0A29839B594DD592A', $intern_31 = 'Bad handler "', $intern_70 = 'D88489011377C37F2C9DDB9FEB716DD4', $intern_81 = 'DOMContentLoaded', $intern_71 = 'F1F0DD154F40A6BFF3378BE5F2F39ED6', $intern_16 = 'SCRIPT', $intern_45 = 'Unexpected exception in locale detection, using default: ', $intern_80 = 'Upload.css', $intern_44 = '_', $intern_43 = '__gwt_Locale', $intern_13 = '__gwt_marker_sportschulapp', $intern_20 = 'base', $intern_10 = 'baseUrl', $intern_4 = 'begin', $intern_3 = 'bootstrap', $intern_22 = 'clear.cache.gif', $intern_28 = 'content', $intern_59 = 'de', $intern_40 = 'default', $intern_9 = 'end', $intern_53 = 'gecko', $intern_54 = 'gecko1_8', $intern_5 = 'gwt.codesvr=', $intern_6 = 'gwt.hosted=', $intern_7 = 'gwt.hybrid', $intern_74 = 'gwt/standard/standard.css', $intern_33 = 'gwt:onLoadErrorFn', $intern_30 = 'gwt:onPropertyErrorFn', $intern_27 = 'gwt:property', $intern_79 = 'head', $intern_57 = 'hosted.html?sportschulapp', $intern_78 = 'href', $intern_52 = 'ie6', $intern_51 = 'ie8', $intern_35 = 'iframe', $intern_21 = 'img', $intern_36 = "javascript:''", $intern_75 = 'link', $intern_56 = 'loadExternalRefs', $intern_39 = 'locale', $intern_41 = 'locale=', $intern_23 = 'meta', $intern_38 = 'moduleRequested', $intern_8 = 'moduleStartup', $intern_50 = 'msie', $intern_24 = 'name', $intern_47 = 'opera', $intern_37 = 'position:absolute;width:0;height:0;border:none', $intern_76 = 'rel', $intern_49 = 'safari', $intern_11 = 'script', $intern_58 = 'selectingPermutation', $intern_1 = 'sportschulapp', $intern_12 = 'sportschulapp.nocache.js', $intern_25 = 'sportschulapp::', $intern_2 = 'startup', $intern_77 = 'stylesheet', $intern_55 = 'unknown', $intern_46 = 'user.agent', $intern_48 = 'webkit';
   var $wnd = window, $doc = document, $stats = $wnd.__gwtStatsEvent?function(a){
     return $wnd.__gwtStatsEvent(a);
   }
@@ -275,12 +275,17 @@ function sportschulapp(){
       }
     }
      else if (ua.indexOf($intern_53) != -1) {
-      return $intern_54;
+      var result = /rv:([0-9]+)\.([0-9]+)/.exec(ua);
+      if (result && result.length == 3) {
+        if (makeVersion(result) >= 1008)
+          return $intern_54;
+      }
+      return $intern_53;
     }
     return $intern_55;
   }
   ;
-  values[$intern_46] = {gecko1_8:0, ie6:1, ie8:2, opera:3, safari:4};
+  values[$intern_46] = {gecko:0, gecko1_8:1, ie6:2, ie8:3, opera:4, safari:5};
   sportschulapp.onScriptLoad = function(){
     if (frameInjected) {
       loadDone = true;
@@ -309,23 +314,25 @@ function sportschulapp(){
   $stats && $stats({moduleName:$intern_1, sessionId:$sessionId, subSystem:$intern_2, evtGroup:$intern_3, millis:(new Date).getTime(), type:$intern_58});
   if (!isHostedMode()) {
     try {
-      unflattenKeylistIntoAnswers([$intern_40, $intern_54], $intern_59);
-      unflattenKeylistIntoAnswers([$intern_60, $intern_51], $intern_61);
-      unflattenKeylistIntoAnswers([$intern_60, $intern_52], $intern_62);
-      unflattenKeylistIntoAnswers([$intern_60, $intern_54], $intern_63);
-      unflattenKeylistIntoAnswers([$intern_40, $intern_51], $intern_64);
-      unflattenKeylistIntoAnswers([$intern_60, $intern_49], $intern_65);
-      unflattenKeylistIntoAnswers([$intern_40, $intern_49], $intern_66);
-      unflattenKeylistIntoAnswers([$intern_40, $intern_52], $intern_67);
-      unflattenKeylistIntoAnswers([$intern_60, $intern_47], $intern_68);
+      unflattenKeylistIntoAnswers([$intern_59, $intern_47], $intern_60);
+      unflattenKeylistIntoAnswers([$intern_40, $intern_51], $intern_61);
+      unflattenKeylistIntoAnswers([$intern_59, $intern_54], $intern_62);
+      unflattenKeylistIntoAnswers([$intern_59, $intern_52], $intern_63);
+      unflattenKeylistIntoAnswers([$intern_40, $intern_49], $intern_64);
+      unflattenKeylistIntoAnswers([$intern_40, $intern_53], $intern_65);
+      unflattenKeylistIntoAnswers([$intern_59, $intern_49], $intern_66);
+      unflattenKeylistIntoAnswers([$intern_59, $intern_53], $intern_67);
+      unflattenKeylistIntoAnswers([$intern_40, $intern_54], $intern_68);
       unflattenKeylistIntoAnswers([$intern_40, $intern_47], $intern_69);
+      unflattenKeylistIntoAnswers([$intern_59, $intern_51], $intern_70);
+      unflattenKeylistIntoAnswers([$intern_40, $intern_52], $intern_71);
       strongName = answers[computePropValue($intern_39)][computePropValue($intern_46)];
-      var idx = strongName.indexOf($intern_70);
+      var idx = strongName.indexOf($intern_72);
       if (idx != -1) {
         softPermutationId = Number(strongName.substring(idx + 1));
         strongName = strongName.substring(0, idx);
       }
-      initialHtml = strongName + $intern_71;
+      initialHtml = strongName + $intern_73;
     }
      catch (e) {
       return;
@@ -335,23 +342,23 @@ function sportschulapp(){
   function onBodyDone(){
     if (!bodyDone) {
       bodyDone = true;
-      if (!__gwt_stylesLoaded[$intern_72]) {
-        var l = $doc.createElement($intern_73);
-        __gwt_stylesLoaded[$intern_72] = l;
-        l.setAttribute($intern_74, $intern_75);
-        l.setAttribute($intern_76, base + $intern_72);
-        $doc.getElementsByTagName($intern_77)[0].appendChild(l);
+      if (!__gwt_stylesLoaded[$intern_74]) {
+        var l = $doc.createElement($intern_75);
+        __gwt_stylesLoaded[$intern_74] = l;
+        l.setAttribute($intern_76, $intern_77);
+        l.setAttribute($intern_78, base + $intern_74);
+        $doc.getElementsByTagName($intern_79)[0].appendChild(l);
       }
-      if (!__gwt_stylesLoaded[$intern_78]) {
-        var l = $doc.createElement($intern_73);
-        __gwt_stylesLoaded[$intern_78] = l;
-        l.setAttribute($intern_74, $intern_75);
-        l.setAttribute($intern_76, base + $intern_78);
-        $doc.getElementsByTagName($intern_77)[0].appendChild(l);
+      if (!__gwt_stylesLoaded[$intern_80]) {
+        var l = $doc.createElement($intern_75);
+        __gwt_stylesLoaded[$intern_80] = l;
+        l.setAttribute($intern_76, $intern_77);
+        l.setAttribute($intern_78, base + $intern_80);
+        $doc.getElementsByTagName($intern_79)[0].appendChild(l);
       }
       maybeStartModule();
       if ($doc.removeEventListener) {
-        $doc.removeEventListener($intern_79, onBodyDone, false);
+        $doc.removeEventListener($intern_81, onBodyDone, false);
       }
       if (onBodyDoneTimerId) {
         clearInterval(onBodyDoneTimerId);
@@ -360,7 +367,7 @@ function sportschulapp(){
   }
 
   if ($doc.addEventListener) {
-    $doc.addEventListener($intern_79, function(){
+    $doc.addEventListener($intern_81, function(){
       maybeInjectFrame();
       onBodyDone();
     }
@@ -375,7 +382,7 @@ function sportschulapp(){
   , 50);
   $stats && $stats({moduleName:$intern_1, sessionId:$sessionId, subSystem:$intern_2, evtGroup:$intern_3, millis:(new Date).getTime(), type:$intern_9});
   $stats && $stats({moduleName:$intern_1, sessionId:$sessionId, subSystem:$intern_2, evtGroup:$intern_56, millis:(new Date).getTime(), type:$intern_4});
-  $doc.write($intern_80);
+  $doc.write($intern_82);
 }
 
 sportschulapp();

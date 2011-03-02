@@ -6,6 +6,8 @@ import gwtupload.server.exceptions.UploadActionException;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Hashtable;
 import java.util.List;
@@ -51,8 +53,15 @@ public class ImageUploadServlet extends UploadAction {
 
 					GregorianCalendar cal = new GregorianCalendar();
 
-					saveName = "C:/xampp/tomcat/webapps/war/uploads/member/" + cal.getTimeInMillis()
-					+ extension;
+					// saveName = "C:/xampp/tomcat/webapps/war/uploads/member/"
+					// + cal.getTimeInMillis() + extension;
+
+					System.out.println("REAL PATH: "
+							+ request.getRealPath("uploads/member/"));
+					saveName = request.getRealPath("uploads/member") + "\\"
+							+ cal.getTimeInMillis() + extension;
+					// saveName = "C:/xampp/tomcat/webapps/war/uploads/member/"
+					// + "neu" + extension;
 
 					File file = new File(saveName);
 
@@ -64,7 +73,9 @@ public class ImageUploadServlet extends UploadAction {
 							item.getContentType());
 
 				} catch (Exception e) {
+					System.out.println("EXCEPTION: " + e);
 					throw new UploadActionException(e.getMessage());
+
 				}
 			}
 		}
@@ -73,7 +84,11 @@ public class ImageUploadServlet extends UploadAction {
 		removeSessionFileItems(request);
 
 		// / Send information of the received files to the client.
-		return saveName;
+		System.out.println("SaveName Server: " + saveName);
+		String tmp = saveName.substring(43, saveName.length());
+		System.out.println("TMP SERVER: " + tmp);
+
+		return tmp;
 	}
 
 	/**
@@ -98,7 +113,7 @@ public class ImageUploadServlet extends UploadAction {
 	 */
 	@Override
 	public void removeItem(HttpServletRequest request, String fieldName)
-	throws UploadActionException {
+			throws UploadActionException {
 		File file = receivedFiles.get(fieldName);
 		receivedFiles.remove(fieldName);
 		receivedContentTypes.remove(fieldName);

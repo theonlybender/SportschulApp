@@ -3,15 +3,18 @@ package de.sportschulApp.client.view.admin;
 import gwtupload.client.MultiUploader;
 import gwtupload.client.PreloadedImage;
 import gwtupload.client.IFileInput.FileInputType;
+import gwtupload.client.SingleUploader;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.HasChangeHandlers;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.rpc.client.RpcService;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.CheckBox;
 import com.google.gwt.user.client.ui.Composite;
@@ -244,7 +247,7 @@ public class CreateMemberView extends Composite implements
 	ArrayList<CourseSelectorWidget> courseList = new ArrayList<CourseSelectorWidget>();
 	private VerticalPanel createMemberPanel = new VerticalPanel();
 	private VerticalPanel createMemberPanel2 = new VerticalPanel();
-	private MultiUploader defaultUploader;
+	private SingleUploader defaultUploader;
 	private Widget diseasesLabel;
 	private TextArea diseasesTextBox;
 	private Label emailLabel;
@@ -313,9 +316,11 @@ public class CreateMemberView extends Composite implements
 
 		sendButton.setText(constants.send());
 
+		// TODO
 		pictureUploadPanel = new HorizontalPanel();
 		pictureUploadLabel = new Label(constants.picture() + ": ");
-		defaultUploader = new MultiUploader(FileInputType.LABEL);
+		defaultUploader = new SingleUploader(FileInputType.LABEL);
+		
 		pictureUploadPanel.add(pictureUploadLabel);
 		pictureUploadPanel.add(defaultUploader);
 		image = new PreloadedImage();
@@ -480,8 +485,6 @@ public class CreateMemberView extends Composite implements
 		diseasesInputPanel.add(diseasesLabel);
 		diseasesInputPanel.add(diseasesTextBox);
 
-		
-		//TODO
 		HorizontalPanel beltsizeInputPanel = new HorizontalPanel();
 		beltsizeLabel = new Label(constants.beltsize() + ":* ");
 		beltsizeListBox = new ListBox();
@@ -494,7 +497,7 @@ public class CreateMemberView extends Composite implements
 		beltsizeListBox.addItem("300");
 
 		beltsizeListBox.setWidth("255px");
-		
+
 		beltsizeInputPanel.add(beltsizeLabel);
 		beltsizeInputPanel.add(beltsizeListBox);
 
@@ -551,8 +554,8 @@ public class CreateMemberView extends Composite implements
 				courseSelectorWrapper.insert(courseList.get(i)
 						.getCourseSelector(), courseSelectorWrapper
 						.getWidgetCount() - 1);
-				courseList.get(i).setCourseLabel(courseSelectorWrapper
-						.getWidgetCount() - 1);
+				courseList.get(i).setCourseLabel(
+						courseSelectorWrapper.getWidgetCount() - 1);
 				break;
 			}
 		}
@@ -579,7 +582,7 @@ public class CreateMemberView extends Composite implements
 	}
 
 	public void fillForm(Member member) {
-		
+
 		header.setText("Mitglied bearbeiten");
 		importantDisclosurePanel.setOpen(true);
 		additionalDisclosurePanel.setOpen(true);
@@ -597,15 +600,14 @@ public class CreateMemberView extends Composite implements
 		int temp = Integer.parseInt("" + (member.getBirthYear())) - 2009;
 		birthTextBox3.setSelectedIndex(-temp);
 		phoneTextBox.setText(member.getPhone());
-		//TODO
-		for(int i=0;i<beltsizeListBox.getItemCount();i++){
-			if(beltsizeListBox.getItemText(i).equals(member.getBeltsize())){
+		for (int i = 0; i < beltsizeListBox.getItemCount(); i++) {
+			if (beltsizeListBox.getItemText(i).equals(member.getBeltsize())) {
 				beltsizeListBox.setSelectedIndex(i);
 			}
-		
+
 		}
-		//beltsizeListBox.setSelectedIndex(i);
-		//beltsizeTextBox.setText(member.getBeltsize());
+		// beltsizeListBox.setSelectedIndex(i);
+		// beltsizeTextBox.setText(member.getBeltsize());
 		mobilephoneTextBox.setText(member.getMobilephone());
 		faxTextBox.setText(member.getFax());
 		emailTextBox.setText(member.getEmail());
@@ -633,7 +635,6 @@ public class CreateMemberView extends Composite implements
 		accountNumberTextBox.setText(member.getAccountNumber());
 		bankNameTextBox.setText(member.getBankName());
 		bankNumberTextBox.setText(member.getBankNumber());
-
 
 	}
 
@@ -788,7 +789,7 @@ public class CreateMemberView extends Composite implements
 		return surnameTextBox;
 	}
 
-	public MultiUploader getUploadHandler() {
+	public SingleUploader getUploadHandler() {
 		return defaultUploader;
 	}
 
@@ -816,6 +817,7 @@ public class CreateMemberView extends Composite implements
 
 	public void setImage(PreloadedImage image, String imageUrl) {
 
+		System.out.println("PICTURE CLIENT 3: " + imageUrl);
 		pictureUploadPanel.remove(defaultUploader);
 		pictureUploadPanel.add(image);
 		this.imageUrl = imageUrl;
@@ -840,7 +842,8 @@ public class CreateMemberView extends Composite implements
 	}
 
 	public void removeLastCourseSelector() {
-		courseSelectorWrapper.remove(courseSelectorWrapper.getWidgetCount()-2);
+		courseSelectorWrapper
+				.remove(courseSelectorWrapper.getWidgetCount() - 2);
 	}
 
 }

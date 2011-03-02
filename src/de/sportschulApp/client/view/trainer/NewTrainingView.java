@@ -193,7 +193,7 @@ public class NewTrainingView extends Composite implements
 						.getTrainingunits()) {
 					return "imgs/thumbs-up.png";
 				} else {
-					return "ximgs/thumbs-down.png";
+					return "imgs/thumbs-down.png";
 
 				}
 			}
@@ -296,6 +296,8 @@ public class NewTrainingView extends Composite implements
 
 			public void update(int index, Member object, String value) {
 				deleteMemberFromList(index, object.getBarcodeID());
+				getBarcodeIDs().remove(object.getBarcodeID());
+
 			}
 		});
 

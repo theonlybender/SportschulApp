@@ -164,6 +164,80 @@ public class DataBankerMember implements DataBankerMemberInterface {
 	public boolean deleteTrainingsPresence(int barcodeID, int day, int month,
 			int year) {
 		DataBankerConnection dbc = new DataBankerConnection();
+		try {
+
+			ResultSet rs = null;
+			Statement stmt = dbc.getStatement();
+
+			String query = "SELECT COUNT(*), barcode_id, day, month, year, count FROM TrainingPresence WHERE day='"
+					+ day
+					+ "' AND month ='"
+					+ month
+					+ "' AND year = '"
+					+ year
+					+ "' AND barcode_id = '" + barcodeID + "'";
+
+			rs = stmt.executeQuery(query);
+			rs.next();
+
+			if (rs.getInt(1) == 0) {
+
+			} else {
+				if (rs.getInt("count") > 1) {
+					int newCount = rs.getInt("count");
+					newCount--;
+					deleteTrainingsPresence2(barcodeID, day, month, year);
+
+					PreparedStatement stmt3 = null;
+					stmt3 = dbc
+							.getConnection()
+							.prepareStatement(
+									"INSERT INTO TrainingPresence(barcode_id, day, month, year, count) VALUES(?,?,?,?,?)");
+					stmt3.setInt(1, barcodeID);
+					stmt3.setInt(2, day);
+					stmt3.setInt(3, month);
+					stmt3.setInt(4, year);
+					stmt3.setInt(5, newCount);
+					stmt3.executeUpdate();
+
+					stmt.close();
+					rs.close();
+					dbc.closeStatement();
+					dbc.close();
+				} else {
+					DataBankerConnection dbc2 = new DataBankerConnection();
+
+					String delete = "DELETE FROM TrainingPresence WHERE barcode_id='"
+							+ barcodeID
+							+ "' AND day = '"
+							+ day
+							+ "' AND month = '"
+							+ month
+							+ "' AND year = '"
+							+ year + "'";
+
+					Statement stmt2 = dbc2.getStatement();
+					try {
+						stmt2.executeUpdate(delete);
+						stmt2.close();
+					} catch (SQLException e) {
+						System.out.println(e);
+						return false;
+					}
+					return true;
+				}
+
+			}
+
+		} catch (SQLException e) {
+			System.out.println(e);
+		}
+		return false;
+	}
+
+	public boolean deleteTrainingsPresence2(int barcodeID, int day, int month,
+			int year) {
+		DataBankerConnection dbc = new DataBankerConnection();
 
 		String delete = "DELETE FROM TrainingPresence WHERE barcode_id='"
 				+ barcodeID + "' AND day = '" + day + "' AND month = '" + month
@@ -473,7 +547,7 @@ public class DataBankerMember implements DataBankerMemberInterface {
 			ResultSet rs = null;
 			Statement stmt = dbc.getStatement();
 
-			String query = "SELECT count(*) FROM TrainingPresence WHERE month ='"
+			String query = "SELECT sum(count) FROM TrainingPresence WHERE month ='"
 					+ month
 					+ "' AND barcode_id = '"
 					+ barcodeID
@@ -728,7 +802,7 @@ public class DataBankerMember implements DataBankerMemberInterface {
 	 * 
 	 * @return true bei erfolg, false bei fehler
 	 */
-	public boolean setTrainingsPresence(int barcodeID, int day, int month,
+	public boolean setTrainingsPresence2(int barcodeID, int day, int month,
 			int year) {
 
 		DataBankerConnection dbc = new DataBankerConnection();
@@ -773,6 +847,83 @@ public class DataBankerMember implements DataBankerMemberInterface {
 			} else {
 
 				// Datum f�r dieses Mitglied schon eingetragen
+				stmt.close();
+				rs.close();
+				dbc.closeStatement();
+				dbc.close();
+				return false;
+
+			}
+
+		} catch (SQLException e) {
+			System.out.println(e);
+		}
+		return false;
+
+	}
+
+	public boolean setTrainingsPresence(int barcodeID, int day, int month,
+			int year) {
+
+		DataBankerConnection dbc = new DataBankerConnection();
+		try {
+
+			ResultSet rs = null;
+			Statement stmt = dbc.getStatement();
+
+			String query = "SELECT COUNT(*), barcode_id, day, month, year, count FROM TrainingPresence WHERE day='"
+					+ day
+					+ "' AND month ='"
+					+ month
+					+ "' AND year = '"
+					+ year
+					+ "' AND barcode_id = '" + barcodeID + "'";
+
+			rs = stmt.executeQuery(query);
+			rs.next();
+
+			if (rs.getInt(1) == 0) {
+				// Datum f�r dieses Mitglied noch nicht eingetragen
+				Statement stmt2 = dbc.getStatement();
+
+				String query2 = "INSERT INTO TrainingPresence(barcode_id, day,month,year, count) VALUES ('"
+						+ barcodeID
+						+ "', '"
+						+ day
+						+ "', '"
+						+ month
+						+ "','"
+						+ year + "','" + 1 + "')";
+				stmt2.executeUpdate(query2);
+
+				stmt.close();
+				stmt2.close();
+				rs.close();
+				dbc.closeStatement();
+				dbc.close();
+
+				return true;
+
+			} else {
+
+				// Datum f�r dieses Mitglied schon eingetragen
+
+				deleteTrainingsPresence2(barcodeID, day, month, year);
+				int newCount = rs.getInt("count");
+				newCount++;
+
+				PreparedStatement stmt3 = null;
+				stmt3 = dbc
+						.getConnection()
+						.prepareStatement(
+								"INSERT INTO TrainingPresence(barcode_id, day, month, year, count) VALUES(?,?,?,?,?)");
+				stmt3.setInt(1, barcodeID);
+				stmt3.setInt(2, day);
+				stmt3.setInt(3, month);
+				stmt3.setInt(4, year);
+				stmt3.setInt(5, newCount);
+				stmt3.executeUpdate();
+
 				stmt.close();
 				rs.close();
 				dbc.closeStatement();
@@ -944,5 +1095,7 @@ public class DataBankerMember implements DataBankerMemberInterface {
 		}
 		return result;
 	}
+
+	
 
 }
