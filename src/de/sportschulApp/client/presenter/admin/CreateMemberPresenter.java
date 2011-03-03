@@ -128,7 +128,7 @@ public class CreateMemberPresenter implements Presenter {
 
 		TextBox getSurnameTextBox();
 
-		SingleUploader getUploadHandler();
+		MultiUploader getUploadHandler();
 
 		ValidationProcessor getValidator();
 
@@ -148,6 +148,8 @@ public class CreateMemberPresenter implements Presenter {
 
 		void removeLastCourseSelector();
 
+		void setImageUrl(String serverResponse);
+
 	}
 
 	private boolean createView;
@@ -162,16 +164,22 @@ public class CreateMemberPresenter implements Presenter {
 
 		public void onFinish(IUploader uploader) {
 			if (uploader.getStatus() == Status.SUCCESS) {
+				// Window.alert("server response: "+uploader.getServerResponse());
 				imageUrl = uploader.getServerResponse();
-				System.out.println("savename CLIENT 1: "+ imageUrl);
+				int start = imageUrl.indexOf("[CDATA[");
+				start = start + 7;
+				int ende = imageUrl.indexOf("]]");
+				// Window.alert("START: "+start+"       ENDE: "+ende);
+				// Window.alert("SUBSTRING: "+imageUrl.substring(start,ende));
 
+				// display.setImageUrl(uploader.getServerResponse());
+				imageUrl = "uploads/member/" + imageUrl.substring(start, ende);
 				new PreloadedImage(imageUrl, showImage);
-				//TODO
+				// TODO
 			}
-			System.out.println("2testtesttest");
-			
+
 		}
-		
+
 	};
 	private PopupDescription popupDesc;
 
@@ -181,11 +189,10 @@ public class CreateMemberPresenter implements Presenter {
 	private OnLoadPreloadedImageHandler showImage = new OnLoadPreloadedImageHandler() {
 		public void onLoad(PreloadedImage image) {
 			image.setWidth("100px");
-			System.out.println("savename CLIENT 2: "+ imageUrl);
 
 			display.setImage(image, imageUrl);
-			
-			//TODO
+
+			// TODO
 		}
 	};
 
@@ -231,7 +238,7 @@ public class CreateMemberPresenter implements Presenter {
 	private void bind() {
 		display.getSendButton().addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
-			
+
 				boolean success = display.getValidator().validate();
 				if (display.getBirthTextBox1().getSelectedIndex() == 0) {
 					display.getBirthTextBox1().setStyleName(
@@ -257,13 +264,13 @@ public class CreateMemberPresenter implements Presenter {
 					display.getBirthTextBox3().removeStyleName(
 							"validationFailedBorder");
 				}
-				if(display.getBeltsizeTextBox().getSelectedIndex()==0){
+				if (display.getBeltsizeTextBox().getSelectedIndex() == 0) {
 					display.getBeltsizeTextBox().setStyleName(
-					"validationFailedBorder");
+							"validationFailedBorder");
 					success = false;
-				}else {
+				} else {
 					display.getBeltsizeTextBox().removeStyleName(
-					"validationFailedBorder");
+							"validationFailedBorder");
 				}
 				if (success) {
 					System.out.println("validation success");
@@ -282,8 +289,7 @@ public class CreateMemberPresenter implements Presenter {
 
 		display.getUploadHandler().addOnFinishUploadHandler(
 				onFinishUploaderHandler);
-		
-		
+
 		for (int i = 0; i < 10; i++) {
 			final int test = i;
 			display.getCourseHandler(i).addChangeHandler(new ChangeHandler() {
@@ -441,7 +447,7 @@ public class CreateMemberPresenter implements Presenter {
 									display.getBankNumberTextBox().getText(),
 									result, grades, tariffs);
 
-							//TODO
+							// TODO
 							try {
 								if (member.getPicture() == null) {
 									member.setPicture("imgs/standartMember.jpg");
@@ -504,7 +510,8 @@ public class CreateMemberPresenter implements Presenter {
 	}
 
 	private String getBeltsize() {
-		return display.getBeltsizeTextBox().getItemText(display.getBeltsizeTextBox().getSelectedIndex());
+		return display.getBeltsizeTextBox().getItemText(
+				display.getBeltsizeTextBox().getSelectedIndex());
 	}
 
 	public void getTariffList(int index) {
@@ -541,7 +548,7 @@ public class CreateMemberPresenter implements Presenter {
 							temp1 = temp1.substring(temp2 + 2,
 									temp1.length() - 2);
 
-							System.out.println("TARIFF: "+result.get(0));
+							System.out.println("TARIFF: " + result.get(0));
 							if (Float.parseFloat(temp1) == tariff) {
 								display.getCourseList().get(index)
 										.getTariffListBox().setSelectedIndex(i);
@@ -755,11 +762,10 @@ public class CreateMemberPresenter implements Presenter {
 								"validationFailedBorder")));
 
 		/*
-		validator.addValidators("beltsize",
-				new NotEmptyValidator(display.getBeltsizeTextBox())
-						.addActionForFailure(new StyleAction(
-								"validationFailedBorder")));
-*/
+		 * validator.addValidators("beltsize", new
+		 * NotEmptyValidator(display.getBeltsizeTextBox())
+		 * .addActionForFailure(new StyleAction( "validationFailedBorder")));
+		 */
 		validator
 				.addValidators("accountForename", new StringLengthValidator(
 						display.getAccountForenameTextBox(), 2, 30)
@@ -783,9 +789,9 @@ public class CreateMemberPresenter implements Presenter {
 						"validationFailedBorder")));
 
 		validator.addValidators("Banknumber",
-				new StringLengthValidator(display.getBankNumberTextBox(), 1,
-						8).addActionForFailure(new StyleAction(
-						"validationFailedBorder")));
+				new StringLengthValidator(display.getBankNumberTextBox(), 1, 8)
+						.addActionForFailure(new StyleAction(
+								"validationFailedBorder")));
 
 		popupDesc.addDescription("forename ", display.getForenameTextBox());
 		popupDesc.addDescription("surname ", display.getSurnameTextBox());
@@ -794,7 +800,7 @@ public class CreateMemberPresenter implements Presenter {
 		popupDesc.addDescription("zipcode ", display.getZipcodeTextBox());
 		popupDesc.addDescription("city ", display.getCityTextBox());
 		popupDesc.addDescription("phone ", display.getPhoneTextBox());
-		//popupDesc.addDescription("beltsize ", display.getBeltsizeTextBox());
+		// popupDesc.addDescription("beltsize ", display.getBeltsizeTextBox());
 		popupDesc.addDescription("mobilephone ",
 				display.getmobilephoneTextBox());
 		popupDesc.addDescription("fax ", display.getFaxTextBox());

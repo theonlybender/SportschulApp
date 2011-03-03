@@ -247,7 +247,7 @@ public class CreateMemberView extends Composite implements
 	ArrayList<CourseSelectorWidget> courseList = new ArrayList<CourseSelectorWidget>();
 	private VerticalPanel createMemberPanel = new VerticalPanel();
 	private VerticalPanel createMemberPanel2 = new VerticalPanel();
-	private SingleUploader defaultUploader;
+	private MultiUploader defaultUploader;
 	private Widget diseasesLabel;
 	private TextArea diseasesTextBox;
 	private Label emailLabel;
@@ -319,7 +319,7 @@ public class CreateMemberView extends Composite implements
 		// TODO
 		pictureUploadPanel = new HorizontalPanel();
 		pictureUploadLabel = new Label(constants.picture() + ": ");
-		defaultUploader = new SingleUploader(FileInputType.LABEL);
+		defaultUploader = new MultiUploader(FileInputType.LABEL);
 		
 		pictureUploadPanel.add(pictureUploadLabel);
 		pictureUploadPanel.add(defaultUploader);
@@ -789,7 +789,7 @@ public class CreateMemberView extends Composite implements
 		return surnameTextBox;
 	}
 
-	public SingleUploader getUploadHandler() {
+	public MultiUploader getUploadHandler() {
 		return defaultUploader;
 	}
 
@@ -844,6 +844,11 @@ public class CreateMemberView extends Composite implements
 	public void removeLastCourseSelector() {
 		courseSelectorWrapper
 				.remove(courseSelectorWrapper.getWidgetCount() - 2);
+	}
+
+	public void setImageUrl(String imageUrl) {
+		pictureUploadPanel.remove(defaultUploader);
+		this.imageUrl = imageUrl;
 	}
 
 }
