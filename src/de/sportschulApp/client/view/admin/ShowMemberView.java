@@ -44,6 +44,8 @@ public class ShowMemberView extends Composite implements
 	private Label bankAccountBankNumberLabel = new Label();
 	private Label diseasesLabel = new Label();
 	private Label costsLabel = new Label();
+	
+	private Label ageLabel = new Label(); 
 
 	public ShowMemberView(LocalizationConstants constants) {
 		VerticalPanel memberPanel = new VerticalPanel();
@@ -116,16 +118,18 @@ public class ShowMemberView extends Composite implements
 		secondaryDetailsData.setWidget(7, 1, noteLabel);
 		secondaryDetailsData.setWidget(8, 0, new Label("Krankheiten: "));
 		secondaryDetailsData.setWidget(8, 1, diseasesLabel);
-		secondaryDetailsData.setWidget(9, 0, new Label("Beitrag: "));
-		secondaryDetailsData.setWidget(9, 1, costsLabel);
-		secondaryDetailsData.setWidget(10, 0, new Label("Kontoinhaber: "));
-		secondaryDetailsData.setWidget(10, 1, bankAccoutNameLabel);
-		secondaryDetailsData.setWidget(11, 0, new Label("Kontonummer: "));
-		secondaryDetailsData.setWidget(11, 1, bankAccountNumberLabel);
-		secondaryDetailsData.setWidget(12, 0, new Label("Bankleitzahl: "));
-		secondaryDetailsData.setWidget(12, 1, bankAccountBankNumberLabel);
-		secondaryDetailsData.setWidget(13, 0, new Label("Bankname: "));
-		secondaryDetailsData.setWidget(13, 1, bankAccountBankNameLabel);
+		secondaryDetailsData.setWidget(9, 0, new Label("Alter: "));
+		secondaryDetailsData.setWidget(9, 1, ageLabel);
+		secondaryDetailsData.setWidget(10, 0, new Label("Beitrag: "));
+		secondaryDetailsData.setWidget(10, 1, costsLabel);
+		secondaryDetailsData.setWidget(11, 0, new Label("Kontoinhaber: "));
+		secondaryDetailsData.setWidget(11, 1, bankAccoutNameLabel);
+		secondaryDetailsData.setWidget(12, 0, new Label("Kontonummer: "));
+		secondaryDetailsData.setWidget(12, 1, bankAccountNumberLabel);
+		secondaryDetailsData.setWidget(13, 0, new Label("Bankleitzahl: "));
+		secondaryDetailsData.setWidget(13, 1, bankAccountBankNumberLabel);
+		secondaryDetailsData.setWidget(14, 0, new Label("Bankname: "));
+		secondaryDetailsData.setWidget(14, 1, bankAccountBankNameLabel);
 
 		memberPanel.add(primaryDetailsPanel);
 		memberPanel.add(secondaryDetailsData);
@@ -176,6 +180,7 @@ public class ShowMemberView extends Composite implements
 		bankAccountBankNumberLabel.setText(member.getBankNumber());
 		bankAccountBankNameLabel.setText(member.getBankName());
 		memberPicture.setUrl(member.getPicture());
+		ageLabel.setText("" + member.getAge());
 
 		float memberCostsTemp = 0;
 		for (int i = 0; i < member.getTariffs().size(); i++) {
