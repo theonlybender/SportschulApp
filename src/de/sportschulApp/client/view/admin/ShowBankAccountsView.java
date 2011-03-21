@@ -34,7 +34,7 @@ public class ShowBankAccountsView extends Composite implements
 		
 		generateButton = new Button("Dtaus Datei generieren");
 		Label textLabel = new Label(
-				"Mit einem Klick auf \"Dtaus Datei generieren\" erzeugen Sie eine \"Dtaus\" datei. Diese können Sie mit einem rechtklick auf den erscheinenden Link \"Dtaus speichern\" mittels \"Ziel speichern unter\" auf Ihrem PC sichern.");
+				"Mit einem Klick auf \"Dtaus Datei generieren\" erzeugen Sie eine \"Dtaus\" datei. Diese können Sie mit einem Rechtsklick auf den erscheinenden Link \"Dtaus speichern\" mittels \"Ziel speichern unter\" auf Ihrem PC sichern.");
 
 		textLabel.setWidth("500px");
 		header.add(formHeader);

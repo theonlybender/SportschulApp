@@ -756,11 +756,7 @@ public class CreateMemberPresenter implements Presenter {
 						.addActionForFailure(new StyleAction(
 								"validationFailedBorder")));
 
-		validator.addValidators("phone",
-				new StringLengthValidator(display.getPhoneTextBox(), 1, 30)
-						.addActionForFailure(new StyleAction(
-								"validationFailedBorder")));
-
+		
 		/*
 		 * validator.addValidators("beltsize", new
 		 * NotEmptyValidator(display.getBeltsizeTextBox())
