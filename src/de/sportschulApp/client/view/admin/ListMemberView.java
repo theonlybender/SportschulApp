@@ -10,6 +10,7 @@ import com.google.gwt.cell.client.TextCell;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.cellview.client.Column;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HasValue;
 import com.google.gwt.user.client.ui.HorizontalPanel;
@@ -115,6 +116,22 @@ public class ListMemberView extends Composite implements ListMemberPresenter.Dis
 		addColumn(new TextCell(), "Stadt", new GetValue<String>() {
 			public String getValue(Member member) {
 				return member.getCity();
+			}
+		}, null);
+		
+		addColumn(new TextCell(), "Alter", new GetValue<String>() {
+			public String getValue(Member member) {
+				return member.getAge() + "";
+			}
+		}, null);
+		
+		addColumn(new TextCell(), "Beitrag", new GetValue<String>() {
+			public String getValue(Member member) {
+				float beitrag = 0;
+				for (int i = 0; i < member.getTariffs().size(); i++ ) {
+					beitrag += member.getTariffs().get(i);
+				}
+				return beitrag + " €";
 			}
 		}, null);
 
