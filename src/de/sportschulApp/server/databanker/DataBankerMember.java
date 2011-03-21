@@ -407,6 +407,25 @@ public class DataBankerMember implements DataBankerMemberInterface {
 				member.setAccountNumber(rs.getString("accountNumber"));
 				member.setBankName(rs.getString("bankName"));
 				member.setBankNumber(rs.getString("bankNumber"));
+				
+				//hier wird das alter berechnet und eingetragen
+				//datenfelder birthDay, birthMonth und birthYear müssen zuvor
+				//korrekt initialisiert sein
+				try {
+					Calendar today = Calendar.getInstance();
+					Calendar birthDate = Calendar.getInstance();
+					birthDate.set( Integer.parseInt(member.getBirthYear()), 
+							Integer.parseInt(member.getBirthMonth()) - 1, 
+							Integer.parseInt(member.getBirthDay()));
+					int memberAge = today.get(today.YEAR) - birthDate.get(birthDate.YEAR);
+					if (today.get(today.DAY_OF_YEAR) < birthDate.get(birthDate.DAY_OF_YEAR)){
+						memberAge--;
+					}
+					member.setAge(memberAge);
+				} catch (Exception e) {
+					System.out.println("Ein fehlerhaftes Datum wurde eingelesen und versucht auf Integer zu parsen");
+					e.printStackTrace();
+				}	
 
 				ArrayList<Integer> courses = new ArrayList<Integer>();
 				ArrayList<Integer> graduation = new ArrayList<Integer>();
