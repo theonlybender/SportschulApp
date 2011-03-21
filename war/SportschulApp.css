@@ -1,5 +1,5 @@
 /** Add css rules here for your application. */
-	/** Example rules used by the template application (remove for your app) */
+/** Example rules used by the template application (remove for your app) */
 h1 {
 	font-size: 2em;
 	font-weight: bold;
@@ -106,7 +106,7 @@ h1 {
 .printInfo {
 	padding-left: 10px;
 	padding-top: 3px;
-	padding-bottom: 5px;	
+	padding-bottom: 5px;
 }
 
 .createUserHeadWrapper {
@@ -159,12 +159,13 @@ h1 {
 	width: 500px;
 }
 
-.detailsDataPanel td:nth-child(1) {
+.detailsDataPanel td:nth-child (1) {
 	color: #6d747f;
 	padding-right: 50px;
 }
-.detailsDataPanel td:nth-child(2){
-	text-align:right;
+
+.detailsDataPanel td:nth-child (2){
+	text-align: right;
 }
 
 .secondaryDetailsData {
@@ -179,23 +180,24 @@ h1 {
 	font-size: 15px;
 }
 
-.primaryDetailsData td:nth-child(1){
-	color:#6d747f;	
-	padding-right:50px;
-}
-
-.primaryDetailsData td:nth-child(2) {
-	text-align: right;
-}
-
-.secondaryDetailsData td:nth-child(1) {
-	color:#6d747f;	
+.primaryDetailsData td:nth-child (1){
+	color: #6d747f;
 	padding-right: 50px;
 }
 
-.secondaryDetailsData td:nth-child(2) {
-	text-align:right;
+.primaryDetailsData td:nth-child (2) {
+	text-align: right;
 }
+
+.secondaryDetailsData td:nth-child (1) {
+	color: #6d747f;
+	padding-right: 50px;
+}
+
+.secondaryDetailsData td:nth-child (2) {
+	text-align: right;
+}
+
 .primaryDetailsData tr {
 	border-bottom: 1px solid black !important;
 }
@@ -343,7 +345,6 @@ h1 {
 	padding-right: 7px;
 	padding-left: 20px;
 }
-
 
 .memberCreateWrapper .gwt-ListBox {
 	width: 210px;
@@ -647,7 +648,6 @@ h1 {
 	border: 1px solid #a9adc3 !important;
 }
 
-
 .countLabel {
 	margin-left: 20px;
 	white-space: nowrap;
@@ -772,9 +772,6 @@ h1 {
 	margin: 20px auto 0 auto;
 }
 
-
-
-
 .diseasesPanel {
 	margin-left: 100px !important;
 	border: 2px solid red !important;
@@ -890,9 +887,7 @@ h1 {
 .likeAbovePanel td {
 	height: 25px !important;
 	width: 200px;
-
 }
-
 
 .addNewCourseSelctorLabel {
 	color: #346492;
@@ -920,18 +915,15 @@ h1 {
 	width: 350px;
 }
 
-
-
-.tableWrapper td:nth-child(7) {
+.tableWrapper td:nth-child (7) {
 	color: red;
-	
 }
 
-.tableWrapper td:nth-child(8) {
-	color: red;	
+.tableWrapper td:nth-child (8) {
+	color: red;
 }
 
-.tableWrapper td:nth-child(6) {
+.tableWrapper td:nth-child (6) {
 	width: 500px !important;
 }
 
@@ -939,18 +931,20 @@ h1 {
 	margin: 20px auto 0 auto;
 }
 
-.bankAccountWrapper .gwt-Button{
+.bankAccountWrapper .gwt-Button {
 	margin-bottom: 20px;
 	margin-top: 20px;
 }
 
+/*URKUNDEN
+Das auskommentierte oben ist ein Backup. Dieses bitte nicht verŠndern. Rauskopieren und dann erst Šndern. 
+Es kann immer nur eine Urkunde aktiv sein. D.h. wenn eine neue eingestellt wird muss die 
+alte auskommentiert werden und wenn sie wieder benutzt werden soll das gleiche Spiel anders herum.
+*/
 
 
+/*	BACKUP NICHT €NDERN!!!
 
-
-
-
-/*URKUNDEN*/
 
 .printLayoutDisplay {
 	display: none;
@@ -990,16 +984,46 @@ h1 {
 	width: auto;
 }
 
-
-
-
-
-/* TODO 
-name von linie bis zur hälfte
-gürtelfarbe etwas größer
-datum/location evtl. etwas größer
 */
+.printLayoutDisplay {
+	display: none;
+}
 
+.printMemberEntry {
+	height: 900px;
+	width: 600px;
+	margin-bottom: 10px;
+	page-break-after: always !important;
+}
 
+.printNameLabel {
+	position: absolute;
+	top: 323px;
+	width: 600px;
+	font-size: 35px;
+	text-align: center;
+}
 
+.printGradeAfterExamLabel {
+	position: absolute;
+	top: 409px;
+	left: 250px;
+	width: auto;
+	font-size: 22px;
+}
 
+.printLocationLabel {
+	position: absolute;
+	top: 678px;
+	left: 90px;
+	font-size: 18px;
+	width: auto;
+}
+
+.printDateLabel {
+	position: absolute;
+	top: 695px;
+	left: 90px;
+	font-size: 18px;
+	width: auto;
+}
