@@ -34,6 +34,7 @@ public class Member implements Serializable {
 	private int trainingunits;
 	private int zipcode;
 	private int trainingUnitsInMonth;
+	private int age = 0;
 	
 	public Member() {
 	}
@@ -508,6 +509,20 @@ public class Member implements Serializable {
 	 */
 	public int getTrainingUnitsInMonth() {
 		return trainingUnitsInMonth;
+	}
+
+	/**
+	 * @param alter the alter to set
+	 */
+	public void setAge(int alter) {
+		this.age = alter;
+	}
+
+	/**
+	 * @return the alter
+	 */
+	public int getAge() {
+		return age;
 	}
 
 }

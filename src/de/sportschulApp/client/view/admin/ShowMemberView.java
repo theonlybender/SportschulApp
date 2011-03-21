@@ -14,35 +14,37 @@ import de.sportschulApp.client.presenter.admin.ShowMemberPresenter;
 import de.sportschulApp.client.view.localization.LocalizationConstants;
 import de.sportschulApp.shared.Member;
 
-public class ShowMemberView extends Composite implements ShowMemberPresenter.Display {
+public class ShowMemberView extends Composite implements
+		ShowMemberPresenter.Display {
 
-	private Label	barcodeIDLabel				= new Label();
-	private Label	beltSizeLabel				= new Label();
-	private Label	birthContainer				= new Label();
-	private Label	cityLabel					= new Label();
-	private Label	coursesLabel				= new Label();
-	private Label	deleteLabel;
-	private Label	editLabel;
-	private Label	emailLabel					= new Label();
-	private Label	faxLabel					= new Label();
-	private Label	forenameLabel				= new Label();
-	private Label	homepageLabel				= new Label();
-	private Image	memberPicture				= new Image("");
-	private Label	mobilePhoneLabel			= new Label();
-	private Label	noteLabel					= new Label();
-	private Label	phoneLabel					= new Label();
-	FlexTable		secondaryDetailsData		= new FlexTable();
-	private Label	streetLabel					= new Label();
-	private Label	surnameLabel				= new Label();
-	private Label	trainingUnitsLabel			= new Label();
-	private Label	zipcodeLabel				= new Label();
-	private Label	closeLabel;
-	private Label	bankAccoutNameLabel			= new Label();
-	private Label	bankAccountNumberLabel		= new Label();
-	private Label	bankAccountBankNameLabel	= new Label();
-	private Label	bankAccountBankNumberLabel	= new Label();
-	private Label	diseasesLabel				= new Label();
-	private Label	costsLabel					= new Label();
+	private Label barcodeIDLabel = new Label();
+	private Label beltSizeLabel = new Label();
+	private Label birthContainer = new Label();
+	private Label cityLabel = new Label();
+	private Label coursesLabel = new Label();
+	private Label deleteLabel;
+	private Label editLabel;
+	private Label emailLabel = new Label();
+	private Label faxLabel = new Label();
+	private Label forenameLabel = new Label();
+	private Label homepageLabel = new Label();
+	private Image memberPicture = new Image("");
+	private Label mobilePhoneLabel = new Label();
+	private Label noteLabel = new Label();
+	private Label phoneLabel = new Label();
+	FlexTable secondaryDetailsData = new FlexTable();
+	private Label streetLabel = new Label();
+	private Label surnameLabel = new Label();
+	private Label trainingUnitsLabel = new Label();
+	private Label zipcodeLabel = new Label();
+	private Label closeLabel;
+	private Label bankAccoutNameLabel = new Label();
+	private Label bankAccountNumberLabel = new Label();
+	private Label bankAccountBankNameLabel = new Label();
+	private Label bankAccountBankNumberLabel = new Label();
+	private Label diseasesLabel = new Label();
+	private Label costsLabel = new Label();	
+	private Label ageLabel = new Label(); 
 
 	public ShowMemberView(LocalizationConstants constants) {
 		VerticalPanel memberPanel = new VerticalPanel();
@@ -106,16 +108,18 @@ public class ShowMemberView extends Composite implements ShowMemberPresenter.Dis
 		secondaryDetailsData.setWidget(7, 1, noteLabel);
 		secondaryDetailsData.setWidget(8, 0, new Label("Krankheiten: "));
 		secondaryDetailsData.setWidget(8, 1, diseasesLabel);
-		secondaryDetailsData.setWidget(9, 0, new Label("Beitrag: "));
-		secondaryDetailsData.setWidget(9, 1, costsLabel);
-		secondaryDetailsData.setWidget(10, 0, new Label("Kontoinhaber: "));
-		secondaryDetailsData.setWidget(10, 1, bankAccoutNameLabel);
-		secondaryDetailsData.setWidget(11, 0, new Label("Kontonummer: "));
-		secondaryDetailsData.setWidget(11, 1, bankAccountNumberLabel);
-		secondaryDetailsData.setWidget(12, 0, new Label("Bankleitzahl: "));
-		secondaryDetailsData.setWidget(12, 1, bankAccountBankNumberLabel);
-		secondaryDetailsData.setWidget(13, 0, new Label("Bankname: "));
-		secondaryDetailsData.setWidget(13, 1, bankAccountBankNameLabel);
+		secondaryDetailsData.setWidget(9, 0, new Label("Alter: "));
+		secondaryDetailsData.setWidget(9, 1, ageLabel);
+		secondaryDetailsData.setWidget(10, 0, new Label("Beitrag: "));
+		secondaryDetailsData.setWidget(10, 1, costsLabel);
+		secondaryDetailsData.setWidget(11, 0, new Label("Kontoinhaber: "));
+		secondaryDetailsData.setWidget(11, 1, bankAccoutNameLabel);
+		secondaryDetailsData.setWidget(12, 0, new Label("Kontonummer: "));
+		secondaryDetailsData.setWidget(12, 1, bankAccountNumberLabel);
+		secondaryDetailsData.setWidget(13, 0, new Label("Bankleitzahl: "));
+		secondaryDetailsData.setWidget(13, 1, bankAccountBankNumberLabel);
+		secondaryDetailsData.setWidget(14, 0, new Label("Bankname: "));
+		secondaryDetailsData.setWidget(14, 1, bankAccountBankNameLabel);
 
 		memberPanel.add(primaryDetailsPanel);
 		memberPanel.add(secondaryDetailsData);
@@ -164,6 +168,7 @@ public class ShowMemberView extends Composite implements ShowMemberPresenter.Dis
 		bankAccountBankNumberLabel.setText(member.getBankNumber());
 		bankAccountBankNameLabel.setText(member.getBankName());
 		memberPicture.setUrl(member.getPicture());
+		ageLabel.setText("" + member.getAge());
 
 		float memberCostsTemp = 0;
 		for (int i = 0; i < member.getTariffs().size(); i++) {
