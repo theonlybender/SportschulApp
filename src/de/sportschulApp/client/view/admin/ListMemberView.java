@@ -28,20 +28,19 @@ import de.sportschulApp.shared.Member;
 @SuppressWarnings("unchecked")
 public class ListMemberView extends Composite implements ListMemberPresenter.Display {
 
-
 	private static interface GetValue<C> {
 		C getValue(Member member);
 	}
-	private CellTable<Member> cellTable = new CellTable<Member>();
-	private ListDataProvider<Member> ldp;
-	private ArrayList<Member> listData = new ArrayList<Member>();
-	private Label searchButton;
-	private TextBox searchInputField;
-	private SelectionModel selectionModel;
-	private Label showAllButton;
 
-	private VerticalPanel wrapper = new VerticalPanel();
+	private CellTable<Member>			cellTable	= new CellTable<Member>();
+	private ListDataProvider<Member>	ldp;
+	private ArrayList<Member>			listData	= new ArrayList<Member>();
+	private Label						searchButton;
+	private TextBox						searchInputField;
+	private SelectionModel				selectionModel;
+	private Label						showAllButton;
 
+	private VerticalPanel				wrapper		= new VerticalPanel();
 
 	public ListMemberView() {
 		wrapper.addStyleName("listWrapper");
@@ -52,14 +51,17 @@ public class ListMemberView extends Composite implements ListMemberPresenter.Dis
 
 	/**
 	 * Add a column with a header.
-	 *
-	 * @param <C> the cell type
-	 * @param cell the cell used to render the column
-	 * @param headerText the header string
-	 * @param getter the value getter for the cell
+	 * 
+	 * @param <C>
+	 *            the cell type
+	 * @param cell
+	 *            the cell used to render the column
+	 * @param headerText
+	 *            the header string
+	 * @param getter
+	 *            the value getter for the cell
 	 */
-	private <C> void addColumn(Cell<C> cell, String headerText,
-			final GetValue<C> getter, FieldUpdater<Member, C> fieldUpdater) {
+	private <C> void addColumn(Cell<C> cell, String headerText, final GetValue<C> getter, FieldUpdater<Member, C> fieldUpdater) {
 		Column<Member, C> column = new Column<Member, C>(cell) {
 			@Override
 			public C getValue(Member object) {
@@ -68,11 +70,10 @@ public class ListMemberView extends Composite implements ListMemberPresenter.Dis
 		};
 		column.setFieldUpdater(fieldUpdater);
 		if (cell instanceof AbstractEditableCell<?, ?>) {
-			//	      editableCells.add((AbstractEditableCell<?, ?>) cell);
+			// editableCells.add((AbstractEditableCell<?, ?>) cell);
 		}
 		cellTable.addColumn(column, headerText);
 	}
-
 
 	@Override
 	public Widget asWidget() {
@@ -106,7 +107,6 @@ public class ListMemberView extends Composite implements ListMemberPresenter.Dis
 			}
 		}, null);
 
-
 		addColumn(new TextCell(), "Nachname", new GetValue<String>() {
 			public String getValue(Member member) {
 				return member.getSurname();
@@ -118,30 +118,32 @@ public class ListMemberView extends Composite implements ListMemberPresenter.Dis
 				return member.getCity();
 			}
 		}, null);
-		
+
 		addColumn(new TextCell(), "Alter", new GetValue<String>() {
 			public String getValue(Member member) {
 				return member.getAge() + "";
 			}
 		}, null);
-		
+
 		addColumn(new TextCell(), "Beitrag", new GetValue<String>() {
 			public String getValue(Member member) {
+
 				float beitrag = 0;
-				for (int i = 0; i < member.getTariffs().size(); i++ ) {
+				for (int i = 0; i < member.getTariffs().size(); i++) {
 					beitrag += member.getTariffs().get(i);
 				}
-				return beitrag + " €";
+				String tmp = String.valueOf(beitrag);
+				int index = tmp.indexOf(".");
+				tmp = tmp.substring(0, index + 3);
+
+				return tmp + " €";
 			}
 		}, null);
-
 
 		tableWrapper.add(cellTable);
 
 		return tableWrapper;
 	}
-
-
 
 	public VerticalPanel createSearchPanel() {
 		VerticalPanel listMemberMenuWrapper = new VerticalPanel();
@@ -154,7 +156,6 @@ public class ListMemberView extends Composite implements ListMemberPresenter.Dis
 
 		HorizontalPanel searchPanel = new HorizontalPanel();
 		searchPanel.setStyleName("searchContainer");
-
 
 		showAllButton = new Label("Alle anzeigen");
 		showAllButton.addStyleName("searchLabel");
@@ -204,7 +205,5 @@ public class ListMemberView extends Composite implements ListMemberPresenter.Dis
 	public void setSelectionModel(SingleSelectionModel selectionModel) {
 		this.selectionModel = selectionModel;
 	}
-
-
 
 }

@@ -285,7 +285,7 @@ public class NewTrainingView extends Composite implements NewTrainingPresenter.D
 				if (torte) {
 					return "imgs/torte.png";
 				} else {
-					return "";
+					return "imgs/noTorte.png";
 
 				}
 			}
