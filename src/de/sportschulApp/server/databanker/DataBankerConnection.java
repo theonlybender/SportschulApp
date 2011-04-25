@@ -12,7 +12,7 @@ public class DataBankerConnection {
 
 	private Connection con = null;
 	private String dbUrl = "jdbc:mysql://127.0.0.1/Sportschule";
-	private String pwd = "";
+	private String pwd = "root";
 
 
 
