@@ -301,7 +301,7 @@ StartEventPresenter.Display {
 	}
 	
 	public void setEvent(Event event) {
-		this.titleBar.setText("Telnehmer für '" + event.getName() + "' (" + event.getDate() + " - Kosten: " + event.getCosts() +")");
+		this.titleBar.setText("Teilnehmer für '" + event.getName() + "' (" + event.getDate() + " - Kosten: " + event.getCosts() +")");
 	}
 
 }
