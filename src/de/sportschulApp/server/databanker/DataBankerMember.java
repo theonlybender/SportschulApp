@@ -30,8 +30,7 @@ public class DataBankerMember implements DataBankerMemberInterface {
 		try {
 			ResultSet rs = null;
 			Statement stmt2 = dbc.getStatement();
-			String query = "SELECT Member_id FROM Member WHERE barcode_id='"
-					+ member.getBarcodeID() + "'";
+			String query = "SELECT Member_id FROM Member WHERE barcode_id='" + member.getBarcodeID() + "'";
 
 			rs = stmt2.executeQuery(query);
 			while (rs.next()) {
@@ -78,10 +77,7 @@ public class DataBankerMember implements DataBankerMemberInterface {
 			PreparedStatement stmt3 = null;
 			try {
 				for (int i = 0; i < member.getCourses().size(); i++) {
-					stmt3 = dbc
-							.getConnection()
-							.prepareStatement(
-									"INSERT INTO Member_has_courses(barcode_id, course_id, graduation, tariff) VALUES(?,?,?,?)");
+					stmt3 = dbc.getConnection().prepareStatement("INSERT INTO Member_has_courses(barcode_id, course_id, graduation, tariff) VALUES(?,?,?,?)");
 					stmt3.setInt(1, member.getBarcodeID());
 					stmt3.setInt(2, member.getCourses().get(i));
 					stmt3.setInt(3, member.getGraduations().get(i));
@@ -119,8 +115,7 @@ public class DataBankerMember implements DataBankerMemberInterface {
 
 		ResultSet rs = null;
 		Statement stmt2 = dbc.getStatement();
-		String query2 = "SELECT barcode_id FROM Member WHERE Member_id='"
-				+ memberID + "'";
+		String query2 = "SELECT barcode_id FROM Member WHERE Member_id='" + memberID + "'";
 
 		try {
 			rs = stmt2.executeQuery(query2);
@@ -136,8 +131,7 @@ public class DataBankerMember implements DataBankerMemberInterface {
 		}
 
 		Statement stmt3 = dbc.getStatement();
-		String query3 = "DELETE FROM Member_has_courses WHERE barcode_id='"
-				+ barcodeId + "'";
+		String query3 = "DELETE FROM Member_has_courses WHERE barcode_id='" + barcodeId + "'";
 
 		try {
 			stmt.executeUpdate(query);
@@ -162,21 +156,14 @@ public class DataBankerMember implements DataBankerMemberInterface {
 	 * 
 	 * @return true bei Erfolg, false bei Scheitern oder leerem Monat
 	 */
-	public boolean deleteTrainingsPresence(int barcodeID, int day, int month,
-			int year) {
+	public boolean deleteTrainingsPresence(int barcodeID, int day, int month, int year) {
 		DataBankerConnection dbc = new DataBankerConnection();
 		try {
 
 			ResultSet rs = null;
 			Statement stmt = dbc.getStatement();
 
-			String query = "SELECT COUNT(*), barcode_id, day, month, year, count FROM TrainingPresence WHERE day='"
-					+ day
-					+ "' AND month ='"
-					+ month
-					+ "' AND year = '"
-					+ year
-					+ "' AND barcode_id = '" + barcodeID + "'";
+			String query = "SELECT COUNT(*), barcode_id, day, month, year, count FROM TrainingPresence WHERE day='" + day + "' AND month ='" + month + "' AND year = '" + year + "' AND barcode_id = '" + barcodeID + "'";
 
 			rs = stmt.executeQuery(query);
 			rs.next();
@@ -190,10 +177,7 @@ public class DataBankerMember implements DataBankerMemberInterface {
 					deleteTrainingsPresence2(barcodeID, day, month, year);
 
 					PreparedStatement stmt3 = null;
-					stmt3 = dbc
-							.getConnection()
-							.prepareStatement(
-									"INSERT INTO TrainingPresence(barcode_id, day, month, year, count) VALUES(?,?,?,?,?)");
+					stmt3 = dbc.getConnection().prepareStatement("INSERT INTO TrainingPresence(barcode_id, day, month, year, count) VALUES(?,?,?,?,?)");
 					stmt3.setInt(1, barcodeID);
 					stmt3.setInt(2, day);
 					stmt3.setInt(3, month);
@@ -208,14 +192,7 @@ public class DataBankerMember implements DataBankerMemberInterface {
 				} else {
 					DataBankerConnection dbc2 = new DataBankerConnection();
 
-					String delete = "DELETE FROM TrainingPresence WHERE barcode_id='"
-							+ barcodeID
-							+ "' AND day = '"
-							+ day
-							+ "' AND month = '"
-							+ month
-							+ "' AND year = '"
-							+ year + "'";
+					String delete = "DELETE FROM TrainingPresence WHERE barcode_id='" + barcodeID + "' AND day = '" + day + "' AND month = '" + month + "' AND year = '" + year + "'";
 
 					Statement stmt2 = dbc2.getStatement();
 					try {
@@ -236,13 +213,10 @@ public class DataBankerMember implements DataBankerMemberInterface {
 		return false;
 	}
 
-	public boolean deleteTrainingsPresence2(int barcodeID, int day, int month,
-			int year) {
+	public boolean deleteTrainingsPresence2(int barcodeID, int day, int month, int year) {
 		DataBankerConnection dbc = new DataBankerConnection();
 
-		String delete = "DELETE FROM TrainingPresence WHERE barcode_id='"
-				+ barcodeID + "' AND day = '" + day + "' AND month = '" + month
-				+ "' AND year = '" + year + "'";
+		String delete = "DELETE FROM TrainingPresence WHERE barcode_id='" + barcodeID + "' AND day = '" + day + "' AND month = '" + month + "' AND year = '" + year + "'";
 
 		Statement stmt = dbc.getStatement();
 		try {
@@ -272,12 +246,10 @@ public class DataBankerMember implements DataBankerMemberInterface {
 
 		DataBankerConnection dbc = new DataBankerConnection();
 		Statement stmt = dbc.getStatement();
-		String query = "SELECT * FROM Member WHERE barcode_id='" + barcodeID
-				+ "'";
+		String query = "SELECT * FROM Member WHERE barcode_id='" + barcodeID + "'";
 
 		Statement stmt2 = dbc.getStatement();
-		String query2 = "SELECT * FROM Member_has_courses WHERE barcode_id='"
-				+ barcodeID + "'";
+		String query2 = "SELECT * FROM Member_has_courses WHERE barcode_id='" + barcodeID + "'";
 
 		try {
 			rs = stmt.executeQuery(query);
@@ -309,25 +281,23 @@ public class DataBankerMember implements DataBankerMemberInterface {
 				member.setAccountNumber(rs.getString("accountNumber"));
 				member.setBankName(rs.getString("bankName"));
 				member.setBankNumber(rs.getString("bankNumber"));
-				
-				//hier wird das alter berechnet und eingetragen
-				//datenfelder birthDay, birthMonth und birthYear müssen zuvor
-				//korrekt initialisiert sein
+
+				// hier wird das alter berechnet und eingetragen
+				// datenfelder birthDay, birthMonth und birthYear müssen zuvor
+				// korrekt initialisiert sein
 				try {
 					Calendar today = Calendar.getInstance();
 					Calendar birthDate = Calendar.getInstance();
-					birthDate.set( Integer.parseInt(member.getBirthYear()), 
-							Integer.parseInt(member.getBirthMonth()) - 1, 
-							Integer.parseInt(member.getBirthDay()));
+					birthDate.set(Integer.parseInt(member.getBirthYear()), Integer.parseInt(member.getBirthMonth()) - 1, Integer.parseInt(member.getBirthDay()));
 					int memberAge = today.get(today.YEAR) - birthDate.get(birthDate.YEAR);
-					if (today.get(today.DAY_OF_YEAR) < birthDate.get(birthDate.DAY_OF_YEAR)){
+					if (today.get(today.DAY_OF_YEAR) < birthDate.get(birthDate.DAY_OF_YEAR)) {
 						memberAge--;
 					}
 					member.setAge(memberAge);
 				} catch (Exception e) {
 					System.out.println("Ein fehlerhaftes Datum wurde eingelesen und versucht auf Integer zu parsen");
 					e.printStackTrace();
-				}	
+				}
 			}
 
 			ArrayList<Integer> courses = new ArrayList<Integer>();
@@ -407,25 +377,23 @@ public class DataBankerMember implements DataBankerMemberInterface {
 				member.setAccountNumber(rs.getString("accountNumber"));
 				member.setBankName(rs.getString("bankName"));
 				member.setBankNumber(rs.getString("bankNumber"));
-				
-				//hier wird das alter berechnet und eingetragen
-				//datenfelder birthDay, birthMonth und birthYear müssen zuvor
-				//korrekt initialisiert sein
+
+				// hier wird das alter berechnet und eingetragen
+				// datenfelder birthDay, birthMonth und birthYear müssen zuvor
+				// korrekt initialisiert sein
 				try {
 					Calendar today = Calendar.getInstance();
 					Calendar birthDate = Calendar.getInstance();
-					birthDate.set( Integer.parseInt(member.getBirthYear()), 
-							Integer.parseInt(member.getBirthMonth()) - 1, 
-							Integer.parseInt(member.getBirthDay()));
+					birthDate.set(Integer.parseInt(member.getBirthYear()), Integer.parseInt(member.getBirthMonth()) - 1, Integer.parseInt(member.getBirthDay()));
 					int memberAge = today.get(today.YEAR) - birthDate.get(birthDate.YEAR);
-					if (today.get(today.DAY_OF_YEAR) < birthDate.get(birthDate.DAY_OF_YEAR)){
+					if (today.get(today.DAY_OF_YEAR) < birthDate.get(birthDate.DAY_OF_YEAR)) {
 						memberAge--;
 					}
 					member.setAge(memberAge);
 				} catch (Exception e) {
 					System.out.println("Ein fehlerhaftes Datum wurde eingelesen und versucht auf Integer zu parsen");
 					e.printStackTrace();
-				}	
+				}
 
 				ArrayList<Integer> courses = new ArrayList<Integer>();
 				ArrayList<Integer> graduation = new ArrayList<Integer>();
@@ -433,8 +401,7 @@ public class DataBankerMember implements DataBankerMemberInterface {
 
 				ResultSet rs2 = null;
 				Statement stmt2 = dbc.getStatement();
-				String query2 = "SELECT * FROM Member_has_courses WHERE barcode_id='"
-						+ member.getBarcodeID() + "'";
+				String query2 = "SELECT * FROM Member_has_courses WHERE barcode_id='" + member.getBarcodeID() + "'";
 
 				rs2 = stmt2.executeQuery(query2);
 				if (rs2.wasNull()) {
@@ -480,8 +447,7 @@ public class DataBankerMember implements DataBankerMemberInterface {
 		DataBankerConnection dbc = new DataBankerConnection();
 
 		Statement stmt = dbc.getStatement();
-		String query = "SELECT barcode_id FROM Member WHERE Member_id='"
-				+ memberID + "'";
+		String query = "SELECT barcode_id FROM Member WHERE Member_id='" + memberID + "'";
 
 		try {
 			rs = stmt.executeQuery(query);
@@ -506,8 +472,7 @@ public class DataBankerMember implements DataBankerMemberInterface {
 			ResultSet rs = null;
 			Statement stmt = dbc.getStatement();
 
-			String query = "SELECT note FROM Member WHERE barcode_id ='"
-					+ barcodeID + "'";
+			String query = "SELECT note FROM Member WHERE barcode_id ='" + barcodeID + "'";
 
 			rs = stmt.executeQuery(query);
 			while (rs.next()) {
@@ -530,8 +495,7 @@ public class DataBankerMember implements DataBankerMemberInterface {
 	 * 
 	 * @return ArrayList<String> presence
 	 */
-	public ArrayList<int[]> getTrainingsPresence(int barcodeID, int month,
-			int year) {
+	public ArrayList<int[]> getTrainingsPresence(int barcodeID, int month, int year) {
 
 		ArrayList<int[]> presence = new ArrayList<int[]>();
 
@@ -543,11 +507,7 @@ public class DataBankerMember implements DataBankerMemberInterface {
 			// "SELECT COUNT(*), day, month, year FROM test WHERE Member_id='"
 			// + memberID + "'";
 
-			String query = "SELECT barcode_id, day, month, year FROM TrainingPresence WHERE month ='"
-					+ month
-					+ "' AND barcode_id = '"
-					+ barcodeID
-					+ "' AND year = '" + year + "'";
+			String query = "SELECT barcode_id, day, month, year FROM TrainingPresence WHERE month ='" + month + "' AND barcode_id = '" + barcodeID + "' AND year = '" + year + "'";
 
 			rs = stmt.executeQuery(query);
 			while (rs.next()) {
@@ -586,11 +546,7 @@ public class DataBankerMember implements DataBankerMemberInterface {
 			ResultSet rs = null;
 			Statement stmt = dbc.getStatement();
 
-			String query = "SELECT sum(count) FROM TrainingPresence WHERE month ='"
-					+ month
-					+ "' AND barcode_id = '"
-					+ barcodeID
-					+ "' AND year = '" + year + "'";
+			String query = "SELECT sum(count) FROM TrainingPresence WHERE month ='" + month + "' AND barcode_id = '" + barcodeID + "' AND year = '" + year + "'";
 
 			rs = stmt.executeQuery(query);
 			while (rs.next()) {
@@ -612,21 +568,7 @@ public class DataBankerMember implements DataBankerMemberInterface {
 
 		DataBankerConnection dbc = new DataBankerConnection();
 		Statement stmt = dbc.getStatement();
-		String query = "SELECT * FROM Member m  where m.forename LIKE '"
-				+ searchQuery + "%' or m.surname LIKE '" + searchQuery
-				+ "%' or m.zipcode LIKE '" + searchQuery
-				+ "%' or m.city LIKE '" + searchQuery + "%' or m.street LIKE '"
-				+ searchQuery + "%' or m.phone LIKE '" + searchQuery
-				+ "%' or m.mobilephone LIKE '" + searchQuery
-				+ "%' or m.fax LIKE '" + searchQuery + "%' or m.email LIKE '"
-				+ searchQuery + "%' or m.homepage LIKE '" + searchQuery
-				+ "%' or m.birthDay LIKE '" + searchQuery
-				+ "%' or m.birthMonth LIKE '" + searchQuery
-				+ "%' or m.birthYear LIKE '" + searchQuery
-				+ "%' or m.diseases LIKE '" + searchQuery
-				+ "%' or m.beltsize LIKE '" + searchQuery
-				+ "%' or m.note LIKE '" + searchQuery
-				+ "%' or m.trainingunits LIKE '" + searchQuery + "%'";
+		String query = "SELECT * FROM Member m where m.forename LIKE '" + searchQuery + "%' or m.surname LIKE '" + searchQuery + "%' or m.barcode_id LIKE '" + searchQuery + "%' or m.city LIKE '" + searchQuery + "%'";
 
 		try {
 			rs = stmt.executeQuery(query);
@@ -665,8 +607,7 @@ public class DataBankerMember implements DataBankerMemberInterface {
 
 				ResultSet rs2 = null;
 				Statement stmt2 = dbc.getStatement();
-				String query2 = "SELECT * FROM Member_has_courses WHERE barcode_id='"
-						+ member.getBarcodeID() + "'";
+				String query2 = "SELECT * FROM Member_has_courses WHERE barcode_id='" + member.getBarcodeID() + "'";
 
 				rs2 = stmt2.executeQuery(query2);
 				if (rs2.wasNull()) {
@@ -683,6 +624,20 @@ public class DataBankerMember implements DataBankerMemberInterface {
 				rs2.close();
 				stmt2.close();
 
+				try {
+					Calendar today = Calendar.getInstance();
+					Calendar birthDate = Calendar.getInstance();
+					birthDate.set(Integer.parseInt(member.getBirthYear()), Integer.parseInt(member.getBirthMonth()) - 1, Integer.parseInt(member.getBirthDay()));
+					int memberAge = today.get(today.YEAR) - birthDate.get(birthDate.YEAR);
+					if (today.get(today.DAY_OF_YEAR) < birthDate.get(birthDate.DAY_OF_YEAR)) {
+						memberAge--;
+					}
+					member.setAge(memberAge);
+				} catch (Exception e) {
+					System.out.println("Ein fehlerhaftes Datum wurde eingelesen und versucht auf Integer zu parsen");
+					e.printStackTrace();
+				}
+
 				memberList.add(member);
 			}
 			rs.close();
@@ -698,127 +653,127 @@ public class DataBankerMember implements DataBankerMemberInterface {
 
 	}
 
-	public ArrayList<Member> search2(String searchQuery) {
-
-		ArrayList<Member> memberList = new ArrayList<Member>();
-
-		ResultSet rs = null;
-
-		DataBankerConnection dbc = new DataBankerConnection();
-		Statement stmt = dbc.getStatement();
-		String query = "SELECT * FROM Member m INNER JOIN Courses c on m.course_01= c.Courses_id or m.course_02=c.Courses_id or m.course_03=c.Courses_id or m.course_04=c.Courses_id or m.course_05=c.Courses_id or m.course_06=c.Courses_id or m.course_07=c.Courses_id or m.course_08=c.Courses_id or m.course_09=c.Courses_id or m.course_10=c.Courses_id where m.forename LIKE '"
-				+ searchQuery
-				+ "%' or m.surname LIKE '"
-				+ searchQuery
-				+ "%' or m.zipcode LIKE '"
-				+ searchQuery
-				+ "%' or m.city LIKE '"
-				+ searchQuery
-				+ "%' or m.street LIKE '"
-				+ searchQuery
-				+ "%' or m.phone LIKE '"
-				+ searchQuery
-				+ "%' or m.mobilephone LIKE '"
-				+ searchQuery
-				+ "%' or m.fax LIKE '"
-				+ searchQuery
-				+ "%' or m.email LIKE '"
-				+ searchQuery
-				+ "%' or m.homepage LIKE '"
-				+ searchQuery
-				+ "%' or m.birthDay LIKE '"
-				+ searchQuery
-				+ "%' or m.birthMonth LIKE '"
-				+ searchQuery
-				+ "%' or m.birthYear LIKE '"
-				+ searchQuery
-				+ "%' or m.diseases LIKE '"
-				+ searchQuery
-				+ "%' or m.beltsize LIKE '"
-				+ searchQuery
-				+ "%' or m.note LIKE '"
-				+ searchQuery
-				+ "%' or m.trainingunits LIKE '"
-				+ searchQuery
-				+ "%' or c.name LIKE '" + searchQuery + "%'";
-
-		try {
-			rs = stmt.executeQuery(query);
-			if (rs.wasNull()) {
-			}
-			while (rs.next()) {
-				Member member = new Member();
-				member.setMemberID(rs.getInt("Member_id"));
-				member.setBarcodeID(rs.getInt("barcode_id"));
-				member.setForename(rs.getString("forename"));
-				member.setSurname(rs.getString("surname"));
-				member.setZipcode(rs.getInt("zipcode"));
-				member.setCity(rs.getString("city"));
-				member.setStreet(rs.getString("street"));
-				member.setPhone(rs.getString("phone"));
-				member.setMobilephone(rs.getString("mobilephone"));
-				member.setFax(rs.getString("fax"));
-				member.setEmail(rs.getString("email"));
-				member.setHomepage(rs.getString("homepage"));
-				member.setBirthDay(rs.getString("birthDay"));
-				member.setBirthMonth(rs.getString("birthMonth"));
-				member.setBirthYear(rs.getString("birthYear"));
-				member.setPicture(rs.getString("picture"));
-				member.setDiseases(rs.getString("diseases"));
-				member.setBeltsize(rs.getString("beltsize"));
-				member.setNote(rs.getString("note"));
-				member.setAccountForename(rs.getString("accountForename"));
-				member.setAccountSurname(rs.getString("accountSurname"));
-				member.setAccountNumber(rs.getString("accountNumber"));
-				member.setBankName(rs.getString("bankName"));
-				member.setBankNumber(rs.getString("bankNumber"));
-
-				ArrayList<Integer> courses = new ArrayList<Integer>();
-				ArrayList<Integer> graduation = new ArrayList<Integer>();
-				ArrayList<Float> tariffs = new ArrayList<Float>();
-
-				ResultSet rs2 = null;
-				Statement stmt2 = dbc.getStatement();
-				String query2 = "SELECT * FROM Member_has_courses WHERE barcode_id='"
-						+ member.getBarcodeID() + "'";
-
-				rs2 = stmt.executeQuery(query2);
-				if (rs2.wasNull()) {
-				}
-				while (rs2.next()) {
-					courses.add(rs2.getInt("course_id"));
-					graduation.add(rs2.getInt("graduation"));
-					tariffs.add(rs2.getFloat("tariff"));
-				}
-				member.setCourses(courses);
-				member.setGraduations(graduation);
-				member.setTariffs(tariffs);
-
-				rs2.close();
-				stmt2.close();
-
-				memberList.add(member);
-			}
-			rs.close();
-			dbc.close();
-			stmt.close();
-			dbc.closeStatement();
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			return null;
-		}
-		return memberList;
-
-	}
+	// public ArrayList<Member> search2(String searchQuery) {
+	//
+	// ArrayList<Member> memberList = new ArrayList<Member>();
+	//
+	// ResultSet rs = null;
+	//
+	// DataBankerConnection dbc = new DataBankerConnection();
+	// Statement stmt = dbc.getStatement();
+	// String query =
+	// "SELECT * FROM Member m INNER JOIN Courses c on m.course_01= c.Courses_id or m.course_02=c.Courses_id or m.course_03=c.Courses_id or m.course_04=c.Courses_id or m.course_05=c.Courses_id or m.course_06=c.Courses_id or m.course_07=c.Courses_id or m.course_08=c.Courses_id or m.course_09=c.Courses_id or m.course_10=c.Courses_id where m.forename LIKE '"
+	// + searchQuery
+	// + "%' or m.surname LIKE '"
+	// + searchQuery
+	// + "%' or m.zipcode LIKE '"
+	// + searchQuery
+	// + "%' or m.city LIKE '"
+	// + searchQuery
+	// + "%' or m.street LIKE '"
+	// + searchQuery
+	// + "%' or m.phone LIKE '"
+	// + searchQuery
+	// + "%' or m.mobilephone LIKE '"
+	// + searchQuery
+	// + "%' or m.fax LIKE '"
+	// + searchQuery
+	// + "%' or m.email LIKE '"
+	// + searchQuery
+	// + "%' or m.homepage LIKE '"
+	// + searchQuery
+	// + "%' or m.birthDay LIKE '"
+	// + searchQuery
+	// + "%' or m.birthMonth LIKE '"
+	// + searchQuery
+	// + "%' or m.birthYear LIKE '"
+	// + searchQuery
+	// + "%' or m.diseases LIKE '"
+	// + searchQuery
+	// + "%' or m.beltsize LIKE '"
+	// + searchQuery
+	// + "%' or m.note LIKE '"
+	// + searchQuery
+	// + "%' or m.trainingunits LIKE '"
+	// + searchQuery
+	// + "%' or c.name LIKE '" + searchQuery + "%'";
+	//
+	// try {
+	// rs = stmt.executeQuery(query);
+	// if (rs.wasNull()) {
+	// }
+	// while (rs.next()) {
+	// Member member = new Member();
+	// member.setMemberID(rs.getInt("Member_id"));
+	// member.setBarcodeID(rs.getInt("barcode_id"));
+	// member.setForename(rs.getString("forename"));
+	// member.setSurname(rs.getString("surname"));
+	// member.setZipcode(rs.getInt("zipcode"));
+	// member.setCity(rs.getString("city"));
+	// member.setStreet(rs.getString("street"));
+	// member.setPhone(rs.getString("phone"));
+	// member.setMobilephone(rs.getString("mobilephone"));
+	// member.setFax(rs.getString("fax"));
+	// member.setEmail(rs.getString("email"));
+	// member.setHomepage(rs.getString("homepage"));
+	// member.setBirthDay(rs.getString("birthDay"));
+	// member.setBirthMonth(rs.getString("birthMonth"));
+	// member.setBirthYear(rs.getString("birthYear"));
+	// member.setPicture(rs.getString("picture"));
+	// member.setDiseases(rs.getString("diseases"));
+	// member.setBeltsize(rs.getString("beltsize"));
+	// member.setNote(rs.getString("note"));
+	// member.setAccountForename(rs.getString("accountForename"));
+	// member.setAccountSurname(rs.getString("accountSurname"));
+	// member.setAccountNumber(rs.getString("accountNumber"));
+	// member.setBankName(rs.getString("bankName"));
+	// member.setBankNumber(rs.getString("bankNumber"));
+	//
+	// ArrayList<Integer> courses = new ArrayList<Integer>();
+	// ArrayList<Integer> graduation = new ArrayList<Integer>();
+	// ArrayList<Float> tariffs = new ArrayList<Float>();
+	//
+	// ResultSet rs2 = null;
+	// Statement stmt2 = dbc.getStatement();
+	// String query2 = "SELECT * FROM Member_has_courses WHERE barcode_id='"
+	// + member.getBarcodeID() + "'";
+	//
+	// rs2 = stmt.executeQuery(query2);
+	// if (rs2.wasNull()) {
+	// }
+	// while (rs2.next()) {
+	// courses.add(rs2.getInt("course_id"));
+	// graduation.add(rs2.getInt("graduation"));
+	// tariffs.add(rs2.getFloat("tariff"));
+	// }
+	// member.setCourses(courses);
+	// member.setGraduations(graduation);
+	// member.setTariffs(tariffs);
+	//
+	// rs2.close();
+	// stmt2.close();
+	//
+	// memberList.add(member);
+	// }
+	// rs.close();
+	// dbc.close();
+	// stmt.close();
+	// dbc.closeStatement();
+	//
+	// } catch (Exception e) {
+	// e.printStackTrace();
+	// return null;
+	// }
+	// return memberList;
+	//
+	// }
 
 	public boolean setNote(int barcodeID, String note) {
 
 		DataBankerConnection dbc = new DataBankerConnection();
 		Statement stmt = dbc.getStatement();
 
-		String query = "UPDATE Member SET note ='" + note
-				+ "' where barcode_id = '" + barcodeID + "'";
+		String query = "UPDATE Member SET note ='" + note + "' where barcode_id = '" + barcodeID + "'";
 
 		try {
 			stmt.executeUpdate(query);
@@ -841,8 +796,7 @@ public class DataBankerMember implements DataBankerMemberInterface {
 	 * 
 	 * @return true bei erfolg, false bei fehler
 	 */
-	public boolean setTrainingsPresence2(int barcodeID, int day, int month,
-			int year) {
+	public boolean setTrainingsPresence2(int barcodeID, int day, int month, int year) {
 
 		DataBankerConnection dbc = new DataBankerConnection();
 		try {
@@ -850,13 +804,7 @@ public class DataBankerMember implements DataBankerMemberInterface {
 			ResultSet rs = null;
 			Statement stmt = dbc.getStatement();
 
-			String query = "SELECT COUNT(*), barcode_id, day, month, year FROM TrainingPresence WHERE day='"
-					+ day
-					+ "' AND month ='"
-					+ month
-					+ "' AND year = '"
-					+ year
-					+ "' AND barcode_id = '" + barcodeID + "'";
+			String query = "SELECT COUNT(*), barcode_id, day, month, year FROM TrainingPresence WHERE day='" + day + "' AND month ='" + month + "' AND year = '" + year + "' AND barcode_id = '" + barcodeID + "'";
 
 			rs = stmt.executeQuery(query);
 			rs.next();
@@ -865,14 +813,7 @@ public class DataBankerMember implements DataBankerMemberInterface {
 				// Datum f�r dieses Mitglied noch nicht eingetragen
 				Statement stmt2 = dbc.getStatement();
 
-				String query2 = "INSERT INTO TrainingPresence(barcode_id, day,month,year) VALUES ('"
-						+ barcodeID
-						+ "', '"
-						+ day
-						+ "', '"
-						+ month
-						+ "','"
-						+ year + "')";
+				String query2 = "INSERT INTO TrainingPresence(barcode_id, day,month,year) VALUES ('" + barcodeID + "', '" + day + "', '" + month + "','" + year + "')";
 				stmt2.executeUpdate(query2);
 
 				stmt.close();
@@ -901,8 +842,7 @@ public class DataBankerMember implements DataBankerMemberInterface {
 
 	}
 
-	public boolean setTrainingsPresence(int barcodeID, int day, int month,
-			int year) {
+	public boolean setTrainingsPresence(int barcodeID, int day, int month, int year) {
 
 		DataBankerConnection dbc = new DataBankerConnection();
 		try {
@@ -910,13 +850,7 @@ public class DataBankerMember implements DataBankerMemberInterface {
 			ResultSet rs = null;
 			Statement stmt = dbc.getStatement();
 
-			String query = "SELECT COUNT(*), barcode_id, day, month, year, count FROM TrainingPresence WHERE day='"
-					+ day
-					+ "' AND month ='"
-					+ month
-					+ "' AND year = '"
-					+ year
-					+ "' AND barcode_id = '" + barcodeID + "'";
+			String query = "SELECT COUNT(*), barcode_id, day, month, year, count FROM TrainingPresence WHERE day='" + day + "' AND month ='" + month + "' AND year = '" + year + "' AND barcode_id = '" + barcodeID + "'";
 
 			rs = stmt.executeQuery(query);
 			rs.next();
@@ -925,14 +859,7 @@ public class DataBankerMember implements DataBankerMemberInterface {
 				// Datum f�r dieses Mitglied noch nicht eingetragen
 				Statement stmt2 = dbc.getStatement();
 
-				String query2 = "INSERT INTO TrainingPresence(barcode_id, day,month,year, count) VALUES ('"
-						+ barcodeID
-						+ "', '"
-						+ day
-						+ "', '"
-						+ month
-						+ "','"
-						+ year + "','" + 1 + "')";
+				String query2 = "INSERT INTO TrainingPresence(barcode_id, day,month,year, count) VALUES ('" + barcodeID + "', '" + day + "', '" + month + "','" + year + "','" + 1 + "')";
 				stmt2.executeUpdate(query2);
 
 				stmt.close();
@@ -952,10 +879,7 @@ public class DataBankerMember implements DataBankerMemberInterface {
 				newCount++;
 
 				PreparedStatement stmt3 = null;
-				stmt3 = dbc
-						.getConnection()
-						.prepareStatement(
-								"INSERT INTO TrainingPresence(barcode_id, day, month, year, count) VALUES(?,?,?,?,?)");
+				stmt3 = dbc.getConnection().prepareStatement("INSERT INTO TrainingPresence(barcode_id, day, month, year, count) VALUES(?,?,?,?,?)");
 				stmt3.setInt(1, barcodeID);
 				stmt3.setInt(2, day);
 				stmt3.setInt(3, month);
@@ -995,8 +919,7 @@ public class DataBankerMember implements DataBankerMemberInterface {
 		try {
 			ResultSet rs = null;
 			Statement stmt2 = dbc.getStatement();
-			String query = "SELECT Member_id FROM Member WHERE barcode_id='"
-					+ member.getBarcodeID() + "'";
+			String query = "SELECT Member_id FROM Member WHERE barcode_id='" + member.getBarcodeID() + "'";
 
 			rs = stmt2.executeQuery(query);
 			while (rs.next()) {
@@ -1042,10 +965,7 @@ public class DataBankerMember implements DataBankerMemberInterface {
 			PreparedStatement stmt3 = null;
 			try {
 				for (int i = 0; i < member.getCourses().size(); i++) {
-					stmt3 = dbc
-							.getConnection()
-							.prepareStatement(
-									"INSERT INTO Member_has_courses(barcode_id, course_id, graduation, tariff) VALUES(?,?,?,?)");
+					stmt3 = dbc.getConnection().prepareStatement("INSERT INTO Member_has_courses(barcode_id, course_id, graduation, tariff) VALUES(?,?,?,?)");
 					stmt3.setInt(1, member.getBarcodeID());
 					stmt3.setInt(2, member.getCourses().get(i));
 					stmt3.setInt(3, member.getGraduations().get(i));
@@ -1113,15 +1033,16 @@ public class DataBankerMember implements DataBankerMemberInterface {
 
 		DataBankerConnection dbc = new DataBankerConnection();
 		Statement stmt = dbc.getStatement();
-		String query = "SELECT SUM(tariff) FROM Member_has_courses WHERE barcode_id ='"
-				+ barcodeId + "'";
+		String query = "SELECT SUM(tariff) FROM Member_has_courses WHERE barcode_id ='" + barcodeId + "' WHERE SUM";
 
 		try {
 			rs = stmt.executeQuery(query);
 			if (rs.wasNull()) {
 			}
 			while (rs.next()) {
-				result = rs.getDouble(1);
+				if (rs.getDouble(1) > 0) {
+					result = rs.getDouble(1);
+				}
 			}
 			rs.close();
 			dbc.close();
@@ -1134,7 +1055,5 @@ public class DataBankerMember implements DataBankerMemberInterface {
 		}
 		return result;
 	}
-
-	
 
 }
