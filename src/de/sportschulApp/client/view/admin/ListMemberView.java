@@ -127,14 +127,19 @@ public class ListMemberView extends Composite implements ListMemberPresenter.Dis
 
 		addColumn(new TextCell(), "Beitrag", new GetValue<String>() {
 			public String getValue(Member member) {
-
-				float beitrag = 0;
-				for (int i = 0; i < member.getTariffs().size(); i++) {
-					beitrag += member.getTariffs().get(i);
+				String tmp = "0";
+				try {
+					float beitrag = 0;
+					for (int i = 0; i < member.getTariffs().size(); i++) {
+						beitrag += member.getTariffs().get(i);
+					}
+					
+					tmp = String.valueOf(beitrag);
+					int index = tmp.indexOf(".");
+					tmp = tmp.substring(0, index + 3);
+				} catch (Exception e) {
+					e.printStackTrace();
 				}
-				String tmp = String.valueOf(beitrag);
-				int index = tmp.indexOf(".");
-				tmp = tmp.substring(0, index + 3);
 
 				return tmp + " €";
 			}

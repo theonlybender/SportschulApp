@@ -170,13 +170,19 @@ public class ShowMemberView extends Composite implements
 		memberPicture.setUrl(member.getPicture());
 		ageLabel.setText("" + member.getAge());
 
-		float memberCostsTemp = 0;
-		for (int i = 0; i < member.getTariffs().size(); i++) {
-			memberCostsTemp += member.getTariffs().get(i);
+		String tmp = "0";
+		try {
+			float memberCostsTemp = 0;
+			for (int i = 0; i < member.getTariffs().size(); i++) {
+				memberCostsTemp += member.getTariffs().get(i);
+			}
+			tmp = String.valueOf(memberCostsTemp);
+			int index = tmp.indexOf(".");
+			tmp = tmp.substring(0, index + 3);			
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-		String tmp = String.valueOf(memberCostsTemp);
-		int index = tmp.indexOf(".");
-		tmp = tmp.substring(0, index + 3);
+		
 		costsLabel.setText(tmp + " €");
 	}
 }
