@@ -11,6 +11,6 @@
 	<classpathentry kind="lib" path="war/WEB-INF/lib/gwt-dnd-3.0.1.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/obantoo-bin-1.4.11.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/gwtupload-0.6.3-compat.jar"/>
-	<classpathentry kind="con" path="com.google.gwt.eclipse.core.GWT_CONTAINER"/>
+	<classpathentry kind="con" path="com.google.gwt.eclipse.core.GWT_CONTAINER/gwt-2.1.0.RC1"/>
 	<classpathentry kind="output" path="war/WEB-INF/classes"/>
 </classpath>
